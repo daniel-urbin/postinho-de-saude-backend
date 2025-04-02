@@ -18,10 +18,10 @@ app.get('/usuario',(req: Request, res: Response) => {
   res.json(usuario1);
 });
 
-app.get('/usuarios', async (req: Request, res: Response) => {
-  const usuarios = await prisma.usuario.findMany();
-  res.json(usuarios);
-});
+//app.get('/usuarios', async (req: Request, res: Response) => {
+//  const usuarios = await prisma.usuario.findMany();
+//  res.json(usuarios);
+//});
 
 // Esta parte é crucial para o Vercel saber qual porta usar
 app.listen(port, () => {
