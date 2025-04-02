@@ -9,13 +9,13 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.get('/usuario',(req: Request, res: Response) => {
-  const usuario = {
+  const usuario1 = {
     id: 1,
     nome: 'Joao',
     email: 'teste@teste.com'
   }
 
-  res.json(usuario);
+  res.json(usuario1);
 });
 
 app.get('/usuarios', async (req: Request, res: Response) => {
