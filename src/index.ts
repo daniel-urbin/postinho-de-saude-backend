@@ -8,7 +8,7 @@ app.get('/', (req: Request, res: Response) => {
   res.send('endpoint disponiveis para testes: /usuario e /usuarios');
 });
 
-app.get('/usuario',(req: Request, res: Response) => {
+app.get('/usuario_teste',(req: Request, res: Response) => {
   const usuario = {
     id: 1,
     nome: 'Joao',
@@ -18,7 +18,7 @@ app.get('/usuario',(req: Request, res: Response) => {
   res.json(usuario);
 });
 
-app.get('/usuarios', async (req: Request, res: Response) => {
+app.get('/usuario', async (req: Request, res: Response) => {
   const usuarios = await prisma.usuario.findMany();
   res.json(usuarios);
 });
