@@ -1,10 +1,11 @@
 import express, { Request, Response } from 'express';
+import { prisma } from './prisma';
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('endpoint disponiveis para testes: /usuario');
+  res.send('endpoint disponiveis para testes: /usuario e /usuarios');
 });
 
 app.get('/usuario',(req: Request, res: Response) => {
@@ -15,6 +16,11 @@ app.get('/usuario',(req: Request, res: Response) => {
   }
 
   res.json(usuario);
+});
+
+app.get('/usuarios', async (req: Request, res: Response) => {
+  const usuarios = await prisma.usuario.findMany();
+  res.json(usuarios);
 });
 
 // Esta parte é crucial para o Vercel saber qual porta usar
