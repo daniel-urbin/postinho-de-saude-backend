@@ -5,10 +5,10 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('endpoint disponiveis para testes: /usuario e /usuarios');
+  res.send('endpoint disponiveis para testes: /usuario <-ok e /usuarios <- ainda implementando');
 });
 
-app.get('/usuario_teste',(req: Request, res: Response) => {
+app.get('/usuario',(req: Request, res: Response) => {
   const usuario = {
     id: 1,
     nome: 'Joao',
@@ -18,7 +18,7 @@ app.get('/usuario_teste',(req: Request, res: Response) => {
   res.json(usuario);
 });
 
-app.get('/usuario', async (req: Request, res: Response) => {
+app.get('/usuarios', async (req: Request, res: Response) => {
   const usuarios = await prisma.usuario.findMany();
   res.json(usuarios);
 });
