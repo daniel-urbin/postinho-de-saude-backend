@@ -1,6 +1,5 @@
 import supabase from '../supabase.config';
 import { Usuario } from '../models/usuario.model';
-import { prisma } from '../prisma';
 
 const getDados = async () => {
   const { data, error } = await supabase
