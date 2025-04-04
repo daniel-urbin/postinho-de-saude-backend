@@ -1,14 +1,12 @@
-import { AppDataSource } from './config/database';
-import app from './app';
+import { supabase } from './supabaseClient'
 
-AppDataSource.initialize()
-  .then(() => {
-    console.log('Data Source has been initialized!');
-    const PORT = process.env.PORT || 3000;
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
-  })
-  .catch((err) => {
-    console.error('Error during Data Source initialization:', err);
-  });
+const testConnection = async () => {
+    const { data, error } = await supabase.from('usuario').select('*');
+    if (error) {
+        console.error('Error:', error);
+    } else {
+        console.log('Data:', data);
+    }
+};
+
+testConnection();
