@@ -16,8 +16,8 @@ let usuarios = [
 
 app.get('/', (req: Request, res: Response) => {
   res.send('endpoint disponible para pruebas: '+
-           '[GET] /usuario //retorna o listado de usarios' +
-           '[POST] /usuario //enviar json no body com campos nome e email');
+           '\n[GET] /usuario //retorna o listado de usarios' +
+           '\n[POST] /usuario //enviar json no body com campos nome e email');
 });
 
 // Endpoint para obtener la lista de usuarios
