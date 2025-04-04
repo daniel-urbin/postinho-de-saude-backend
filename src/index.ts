@@ -8,11 +8,24 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.get('/usuario',(req: Request, res: Response) => {
-  const usuario1 = {
+  const usuario1 = [
+    {
     id: 1,
     nome: 'Joao',
-    email: 'teste@teste.com'
-  }
+    email: 'teste1@teste.com'
+    },
+    {
+    id: 2,
+    nome: 'Pedro',
+    email: 'teste2@teste.com'
+    },
+    {
+    id: 3,
+    nome: 'Maria',
+    email: 'teste3@teste.com'
+    }
+    
+  ]
 
   res.json(usuario1);
 });
