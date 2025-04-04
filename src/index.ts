@@ -9,19 +9,9 @@ app.use(express.json());
 let usuarios = [
   {
     id: 1,
-    nome: 'Joao',
+    nome: 'UsuarioInicial',
     email: 'teste1@teste.com',
-  },
-  {
-    id: 2,
-    nome: 'Pedro',
-    email: 'teste2@teste.com',
-  },
-  {
-    id: 3,
-    nome: 'Maria',
-    email: 'teste3@teste.com',
-  },
+  }
 ];
 
 app.get('/', (req: Request, res: Response) => {
