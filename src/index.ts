@@ -1,41 +1,56 @@
 import express, { Request, Response } from 'express';
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('endpoint disponivel para testes:[GET] /usuario');
-});
+// Middleware para parsear el cuerpo de las solicitudes
+app.use(express.json());
 
-app.get('/usuario',(req: Request, res: Response) => {
-  const usuario1 = [
-    {
+let usuarios = [
+  {
     id: 1,
     nome: 'Joao',
-    email: 'teste1@teste.com'
-    },
-    {
+    email: 'teste1@teste.com',
+  },
+  {
     id: 2,
     nome: 'Pedro',
-    email: 'teste2@teste.com'
-    },
-    {
+    email: 'teste2@teste.com',
+  },
+  {
     id: 3,
     nome: 'Maria',
-    email: 'teste3@teste.com'
-    }
-    
-  ]
+    email: 'teste3@teste.com',
+  },
+];
 
-  res.json(usuario1);
+app.get('/', (req: Request, res: Response) => {
+  res.send('endpoint disponible para pruebas: [GET] /usuario, [POST] /usuario');
 });
 
-//app.get('/usuarios', async (req: Request, res: Response) => {
-//  const usuarios = await prisma.usuario.findMany();
-//  res.json(usuarios);
-//});
+// Endpoint para obtener la lista de usuarios
+app.get('/usuario', (req: Request, res: Response) => {
+  res.json(usuarios);
+});
 
-// Esta parte é crucial para o Vercel saber qual porta usar
+// Endpoint para agregar un nuevo usuario
+app.post('/usuario', (req: Request, res: Response) => {
+  const { nome, email } = req.body;
+
+  // Generar un nuevo ID
+  const newId = usuarios.length > 0 ? usuarios[usuarios.length - 1].id + 1 : 1;
+
+  const newUser = {
+    id: newId,
+    nome,
+    email,
+  };
+
+  usuarios.push(newUser);
+  res.status(201).json(newUser);
+});
+
+// Esta parte es crucial para el Vercel saber cuál puerto usar
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
