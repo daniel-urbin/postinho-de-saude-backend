@@ -1,20 +1,13 @@
 {
   "compilerOptions": {
-    /* Visit https://aka.ms/tsconfig to read more about this file */
-
-    /* Basic Options */
-    "target": "ES6",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', 'ES2021', 'ES2022', 'ES2023', 'ESNext'. */
-    "module": "commonjs",                     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', 'esnext'. */
-    "outDir": "./dist",                       /* Redirect output structure to the directory. */
-    "rootDir": "./src",                       /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
-
-    /* Strict Type-Checking Options */
-    "strict": true,                           /* Enable all strict type-checking options. */
-    "esModuleInterop": true,                  /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace object for all imports. Implies 'allowSyntheticDefaultImports'. */
-    "skipLibCheck": true,                     /* Skip type checking of declaration files. */
-    "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
+    "target": "ES6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "strict": true
   },
-  "include": ["src/**/*.ts"],                /* Specify which files the TypeScript compiler should be looking at */
-  "exclude": ["node_modules"]                 /* List of folders to exclude */
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }
-

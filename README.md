@@ -1,4 +1,4 @@
-# PostinhoDeSaude-Backend
+# postinho-de-saude-backend
 
 Software para agendamento de consulta no "Postinho de Saúde" do SUS. CURSO SUPERIOR DE ANÁLISE E DESENVOLVIMENTO DE SISTEMAS
 

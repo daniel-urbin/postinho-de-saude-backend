@@ -1,29 +1,28 @@
-import express from 'express';
-import { Pool } from 'pg';
+import express, { Request, Response } from 'express';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-// Configuração do banco de dados
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+app.get('/', (req: Request, res: Response) => {
+  res.send('endpoint disponiveis para testes: /usuario <-ok e /usuarios <- ainda implementando');
 });
 
-// Endpoint GET para consultar os usuários do banco de dados
-app.get('/usuario', async (req, res) => {
-  try {
-    const result = await pool.query('SELECT * FROM usuario');
-    res.json(result.rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Erro ao consultar usuários');
+app.get('/usuario',(req: Request, res: Response) => {
+  const usuario1 = {
+    id: 1,
+    nome: 'Joao',
+    email: 'teste@teste.com'
   }
+
+  res.json(usuario1);
 });
 
-// Iniciar o servidor
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+//app.get('/usuarios', async (req: Request, res: Response) => {
+//  const usuarios = await prisma.usuario.findMany();
+//  res.json(usuarios);
+//});
+
+// Esta parte é crucial para o Vercel saber qual porta usar
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
