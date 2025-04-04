@@ -4,7 +4,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('endpoint disponiveis para testes: /usuario <-ok e /usuarios <- ainda implementando');
+  res.send('endpoint disponiveis para testes: /usuario <-ok e /usuarios <- 03-04-2025 -- ainda implementando nao esta facil');
 });
 
 app.get('/usuario',(req: Request, res: Response) => {
