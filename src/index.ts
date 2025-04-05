@@ -55,7 +55,9 @@ app.post('/usuario', async (req: Request, res: Response) => {
       res.status(500).send({ mensagem: "Erro ao inserir o usuário" });
     }
     else if (data === null) {
-      res.status(201).send({ mensagem: "nem idea o usuário" });
+      //tive que deixar assim por agora já que esta fucnioando,
+      //mais mesmo dando mensagem de erro vai criar 
+      res.status(201).send({ mensagem: "Usuário criado com sucesso" });
     } else {      
       res.status(201).json(data[0]);
     }
