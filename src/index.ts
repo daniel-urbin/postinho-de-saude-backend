@@ -51,10 +51,10 @@ app.post('/usuario', async (req: Request, res: Response) => {
       .from('usuario')
       .insert([{ nome, email }]);
 
-    if (error) {
+    if (error || data === null) {
       res.status(500).send({ mensagem: "num 1  Erro ao inserir o usuário" });
     }
-    else if (data !== null) {
+    else {
       res.status(201).json(data[0]);
     }
   } catch (error) {
