@@ -86,6 +86,7 @@ app.get('/supabase/usuarios', async (req: Request, res: Response) => {
     if (error) {
       res.status(500).send({ mensagem: "Erro ao ler a tabela 'usuario'" });
     } else {
+      console.log("conectando a base de dados...")
       res.json(data);
     }
   } catch (error) {
