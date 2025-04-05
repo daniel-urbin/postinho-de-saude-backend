@@ -52,16 +52,16 @@ app.post('/usuario', async (req: Request, res: Response) => {
       .insert([{ nome, email }]);
 
     if (error) {
-      res.status(500).send({ mensagem: "Erro ao inserir o usuário" });
+      res.status(500).send({ mensagem: "num 1  Erro ao inserir o usuário" });
     }
     else if (data === null) {
-      res.status(500).send({ mensagem: "Erro ao inserir o usuário" });
+      res.status(500).send({ mensagem: "num 2  Erro ao inserir o usuário" });
     } else {
       console.log("post ok");
       res.status(201).json(data[0]);
     }
   } catch (error) {
-    res.status(500).send({ mensagem: "Erro ao inserir o usuário" });
+    res.status(500).send({ mensagem: "num 3 Erro ao inserir o usuário" });
   }
 });
 
