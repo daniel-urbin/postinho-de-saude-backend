@@ -11,11 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@nestjs/typeorm": "^11.0.0",
     "@supabase/supabase-js": "^2.49.4",
     "express": "^5.1.0",
-    "pg": "^8.14.1",
-    "typeorm": "^0.3.22"
+    "pg": "^8.14.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.1",
