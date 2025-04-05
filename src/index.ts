@@ -66,6 +66,10 @@ app.delete("/usuario/:id", (req: Request, res: Response) => {
   const indice = usuarios.findIndex(u => u.id === id);
   if (indice === -1) {
     res.status(404).send({ mensagem: "Usuário não encontrado" });
+  }
+  else if (id === 1){
+    res.status(401).send({ mensagem: "Usuário com id: 1 não pode ser excluir é o usuario inicial para testes! " });
+
   } else {
     usuarios.splice(indice, 1);
     res.send({ mensagem: "Usuário excluído com sucesso" });
