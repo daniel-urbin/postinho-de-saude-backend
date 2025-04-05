@@ -73,7 +73,8 @@ app.put("/usuario/:id", async (req: Request, res: Response) => {
     const { nome, email } = req.body;
     const { data, error } = await supabase
       .from('usuario')
-      .update({ id: id, nome: nome, email: email });
+      .update({ nome: nome, email: email })
+      .eq('id', id);
 
     if (error) {
       res.status(500).send({ mensagem: "Erro ao atualizar o usuário" });
