@@ -1,7 +1,6 @@
 import express, { Request, Response } from 'express';
 import supabase from './supabase.config';
 
-
 const app = express();
 const port = process.env.PORT || 3001;
 
@@ -15,7 +14,6 @@ let usuarios = [
     email: "teste1@teste.com",
   }
 ];
-
 
 // GET lista de usuarios
 app.get('/usuarios', (req: Request, res: Response) => {
@@ -75,6 +73,23 @@ app.delete("/usuario/:id", (req: Request, res: Response) => {
   } else {
     usuarios.splice(indice, 1);
     res.send({ mensagem: "Usuário excluído com sucesso" });
+  }
+})
+
+// Novo endpoint GET para ler a tabela "usuario" do Supabase
+app.get('/supabase/usuarios', async (req: Request, res: Response) => {
+  try {
+    const { data, error } = await supabase
+      .from('usuario')
+      .select('*');
+
+    if (error) {
+      res.status(500).send({ mensagem: "Erro ao ler a tabela 'usuario'" });
+    } else {
+      res.json(data);
+    }
+  } catch (error) {
+    res.status(500).send({ mensagem: "Erro ao ler a tabela 'usuario'" });
   }
 })
 
