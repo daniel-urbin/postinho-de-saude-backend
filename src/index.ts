@@ -77,9 +77,10 @@ app.put("/usuario/:id", async (req: Request, res: Response) => {
 
     if (error) {
       res.status(500).send({ mensagem: "Erro ao atualizar o usuário" });
-    }
-    else if (data === null) {
-      res.status(500).send({mensagem: "Erro ao atualizar o usuário"})
+    } else if (data === null) {
+      //tive que deixar assim por agora já que esta fucnioando,
+      //mais mesmo dando mensagem de erro vai fazer update 
+      res.status(200).send({mensagem: "Usuário atualizado com sucesso"})
     } else {
       res.json(data[0]);
     }
