@@ -43,10 +43,10 @@ router.get("/usuario/:id", async (req: Request, res: Response) => {
 // Endpoint para agregar un nuevo usuario
 router.post('/usuario', async (req: Request, res: Response) => {
   try {
-    const { nome, email } = req.body;
+    const { nome, email, senha, cpf, telefone, dataNascimento, endereco } = req.body;
     const { data, error } = await supabase
       .from('usuario')
-      .insert([{ nome, email }]);
+      .insert([{ nome, email, senha, cpf, telefone, dataNascimento, endereco }]);
 
     if (error) {
       res.status(500).send({ mensagem: "Erro ao inserir o usuário" });
@@ -67,11 +67,12 @@ router.post('/usuario', async (req: Request, res: Response) => {
 router.put("/usuario/:id", async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
-    const { nome, email } = req.body;
+    const { nome, email, senha, cpf, telefone, dataNascimento, endereco } = req.body;
     const { data, error } = await supabase
       .from('usuario')
-      .update({ nome: nome, email: email })
+      .update({ nome: nome, email: email, senha: senha, cpf: cpf, telefone: telefone, dataNascimento: dataNascimento, endereco: endereco })
       .eq('id', id);
+
 
     if (error) {
       res.status(500).send({ mensagem: "Erro ao atualizar o usuário" });
