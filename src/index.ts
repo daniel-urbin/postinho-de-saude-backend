@@ -7,8 +7,8 @@ const port = process.env.PORT || 3001;
 
 // Middleware para parsear el cuerpo de las solicitudes
 app.use(express.json());
-app.use('/api', usuariosRouter);
-app.use('/api', autenticarRouter);
+app.use(usuariosRouter);
+app.use(autenticarRouter);
 
 // Esta parte es crucial para el Vercel saber cuál puerto usar
 app.listen(port, () => {
