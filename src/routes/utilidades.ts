@@ -16,15 +16,37 @@ const endpoints = `
   </p>
   <h2>Endpoints disponíveis</h2>
   <ul>
-    <li><strong>POST</strong> /login</li>
-    <li><strong>GET</strong> /protected</li>
-    <li><strong>GET</strong> /usuarios</li>
-    <li><strong>GET</strong> /usuario/:id</li>
-    <li><strong>POST</strong> /usuario</li>
-    <li><strong>PUT</strong> /usuario/:id</li>
-    <li><strong>DELETE</strong> /usuario/:id</li>
+    <li>
+      <strong>POST</strong> /login
+      <p>Autenticação de usuário. Parâmetros: username, password. Retorno: token de autenticação ou erro de credenciais inválidas.</p>
+    </li>
+    <li>
+      <strong>GET</strong> /protected
+      <p>Acesso a área protegida. Parâmetros: token de autenticação no cabeçalho Authorization. Retorno: mensagem de boas-vindas ou erro de token inválido.</p>
+    </li>
+    <li>
+      <strong>GET</strong> /usuarios
+      <p>Lista de usuários. Parâmetros: nenhum. Retorno: lista de usuários ou erro de leitura da tabela.</p>
+    </li>
+    <li>
+      <strong>GET</strong> /usuario/:id
+      <p>Detalhes de um usuário. Parâmetros: id do usuário. Retorno: detalhes do usuário ou erro de leitura da tabela.</p>
+    </li>
+    <li>
+      <strong>POST</strong> /usuario
+      <p>Criação de um novo usuário. Parâmetros: nome, email. Retorno: usuário criado ou erro de inserção.</p>
+    </li>
+    <li>
+      <strong>PUT</strong> /usuario/:id
+      <p>Atualização de um usuário. Parâmetros: id do usuário, nome, email. Retorno: usuário atualizado ou erro de atualização.</p>
+    </li>
+    <li>
+      <strong>DELETE</strong> /usuario/:id
+      <p>Exclusão de um usuário. Parâmetros: id do usuário. Retorno: mensagem de exclusão ou erro de exclusão.</p>
+    </li>
   </ul>
 `;
+
 
 router.get('/', (req: Request, res: Response) => {
   res.send(endpoints);
