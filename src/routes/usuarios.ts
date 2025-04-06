@@ -42,9 +42,6 @@ router.get("/usuario/:id", async (req: Request, res: Response) => {
 })
 
 
-
-// ...
-
 // Endpoint para agregar un nuevo usuario
 router.post('/usuario', async (req: Request, res: Response) => {
   try {
