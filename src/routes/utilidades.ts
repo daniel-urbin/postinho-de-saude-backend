@@ -16,13 +16,13 @@ const endpoints = `
   </p>
   <h2>Endpoints disponíveis</h2>
   <ul>
-    <li><strong>POST</strong> /login (Autenticação de usuário. Parâmetros: username, password. Retorno: token de autenticação ou erro de credenciais inválidas.)</li>
-    <li><strong>GET</strong> /protected (Acesso a área protegida. Parâmetros: token de autenticação no cabeçalho Authorization. Retorno: mensagem de boas-vindas ou erro de token inválido.)</li>
-    <li><strong>GET</strong> /usuarios (Lista de usuários. Parâmetros: nenhum. Retorno: lista de usuários ou erro de leitura da tabela.)</li>
-    <li><strong>GET</strong> /usuario/:id (Detalhes de um usuário. Parâmetros: id do usuário. Retorno: detalhes do usuário ou erro de leitura da tabela.)</li>
-    <li><strong>POST</strong> /usuario (Criação de um novo usuário. Parâmetros: nome, email. Retorno: usuário criado ou erro de inserção.)</li>
-    <li><strong>PUT</strong> /usuario/:id (Atualização de um usuário. Parâmetros: id do usuário, nome, email. Retorno: usuário atualizado ou erro de atualização.)</li>
-    <li><strong>DELETE</strong> /usuario/:id (Exclusão de um usuário. Parâmetros: id do usuário. Retorno: mensagem de exclusão ou erro de exclusão.)</li>
+    <li><strong>POST</strong> /login<br>(Autenticação de usuário. Parâmetros: username, password. Retorno: token de autenticação ou erro de credenciais inválidas.)</li>
+    <li><strong>GET</strong> /protected<br>(Acesso a área protegida. Parâmetros: token de autenticação no cabeçalho Authorization. Retorno: mensagem de boas-vindas ou erro de token inválido.)</li>
+    <li><strong>GET</strong> /usuarios<br>(Lista de usuários. Parâmetros: nenhum. Retorno: lista de usuários ou erro de leitura da tabela.)</li>
+    <li><strong>GET</strong> /usuario/:id<br>(Detalhes de um usuário. Parâmetros: id do usuário. Retorno: detalhes do usuário ou erro de leitura da tabela.)</li>
+    <li><strong>POST</strong> /usuario<br>(Criação de um novo usuário. Parâmetros: nome, email. Retorno: usuário criado ou erro de inserção.)</li>
+    <li><strong>PUT</strong> /usuario/:id<br>(Atualização de um usuário. Parâmetros: id do usuário, nome, email. Retorno: usuário atualizado ou erro de atualização.)</li>
+    <li><strong>DELETE</strong> /usuario/:id<br>(Exclusão de um usuário. Parâmetros: id do usuário. Retorno: mensagem de exclusão ou erro de exclusão.)</li>
   </ul>
 `;
 
