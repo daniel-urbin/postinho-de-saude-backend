@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import supabase from '../supabase.config';
+import supabase from '../configs/supabase.config';
 import bcrypt from 'bcryptjs';
 import { tratarResposta } from '../tratativas/tratarResposta';
 import { Usuario } from '../models/usuario';
