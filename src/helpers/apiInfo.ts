@@ -3,7 +3,7 @@ import express, { Request, Response, Router } from 'express';
 const router = express.Router();
 
 const endpoints = `
-  <h1>Backend do Postinho de Saúde</h1>
+  <h1>Backend do Postinho de Saúde teste sincronizmo</h1>
   <p>
     Software para agendamento de consulta no "Postinho de Saúde" do SUS,
     desenvolvido por estudantes do Curso de Análise e Desenvolvimento de Sistemas
