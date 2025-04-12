@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import usuariosRouter from './routes/usuarios';
 import autenticarRouter from './routes/autenticar';
-import utilidadesRouter from './helpers/utilidades';
+import utilidadesRouter from './helpers/apiInfo';
 
 const app = express();
 const port = process.env.PORT || 3001;
