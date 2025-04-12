@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import supabase from '../configs/supabase.config';
 import bcrypt from 'bcryptjs';
-import { tratarResposta } from '../tratativas/tratarResposta';
+import { tratarResposta } from '../handlers/tratarResposta';
 import { Usuario } from '../models/usuario';
 import { TDataErro } from '../models/types';
 import { enviarErro500 } from '../helpers/responseHelpers';
