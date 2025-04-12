@@ -1,24 +1,31 @@
 import express, { Request, Response } from 'express';
 import supabase from '../supabase.config';
 import bcrypt from 'bcryptjs';
+import { tratarResposta } from '../tratativas/tratarResposta';
+import { Usuario } from '../models/usuario';
+import { TDataErro } from '../models/types';
+import { enviarErro500 } from '../helpers/responseHelpers';
 
 const router = express.Router();
-
 
 // GET lista de usuarios
 router.get('/usuarios', async (req: Request, res: Response) => {
   try {
-    const { data, error } = await supabase
+    let DataErro: TDataErro;
+
+    DataErro = await supabase
       .from('usuario')
       .select('*');
 
-    if (error) {
-      res.status(500).send({ mensagem: "Erro ao ler a tabela 'usuario'" });
+    const resp = tratarResposta(DataErro, true, false);
+    if (resp.mensagem) {
+      res.status(resp.status).send({ mensagem: resp.mensagem });
     } else {
-      res.json(data);
+      res.status(resp.status).json(resp.dados);
     }
+
   } catch (error) {
-    res.status(500).send({ mensagem: "Erro ao ler a tabela 'usuario'" });
+    enviarErro500("Erro ao ler a tabela 'usuario'")(res);
   }
 });
 
@@ -26,41 +33,46 @@ router.get('/usuarios', async (req: Request, res: Response) => {
 router.get("/usuario/:id", async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
-    const { data, error } = await supabase
+    let DataErro: TDataErro;
+
+    DataErro = await supabase
       .from('usuario')
       .select('*')
       .eq('id', id);
 
-    if (error) {
-      res.status(500).send({ mensagem: "Erro ao ler a tabela 'usuario'" });
+    const resp = tratarResposta(DataErro, true, false);
+    if (resp.mensagem) {
+      res.status(resp.status).send({ mensagem: resp.mensagem });
     } else {
-      res.json(data[0]);
+      res.status(resp.status).json(resp.dados);
     }
+
   } catch (error) {
-    res.status(500).send({ mensagem: "Erro ao ler a tabela 'usuario'" });
+    enviarErro500("Erro ao ler a tabela 'usuario'")(res);
   }
 })
 
-
-// Endpoint para agregar un nuevo usuario
+// POST usuario
 router.post('/usuario', async (req: Request, res: Response) => {
-  try {
-    const { nome, email, senha, cpf, telefone, dataNascimento, endereco } = req.body;
-    const senhaCriptografada = await bcrypt.hash(senha, 10);
-    const { data, error } = await supabase
-      .from('usuario')
-      .insert([{ nome, email, senha: senhaCriptografada, cpf, telefone, dataNascimento, endereco }]);
 
-    if (error) {
-      res.status(500).send({ mensagem: "Erro ao inserir o usuário" });
+  try {
+    const usu: Usuario = req.body as Usuario;
+    usu.senha = await bcrypt.hash(usu.senha, 10);
+    let DataErro: TDataErro;
+
+    DataErro = await supabase
+      .from('usuario')
+      .insert([usu]);
+
+    const resp = tratarResposta(DataErro, false, false);
+    if (resp.mensagem) {
+      res.status(resp.status).send({ mensagem: resp.mensagem });
+    } else {
+      res.status(resp.status).json(resp.dados);
     }
-    else if (data === null) {
-      res.status(201).send({ mensagem: "Usuário criado com sucesso" });
-    } else {      
-      res.status(201).json(data[0]);
-    }
+
   } catch (error) {
-    res.status(500).send({ mensagem: "Erro ao inserir o usuário" });
+    enviarErro500("Erro ao inserir o usuário")(res);
   }
 });
 
@@ -73,7 +85,9 @@ router.put("/usuario/:id", async (req: Request, res: Response) => {
     if (senha) {
       senhaCriptografada = await bcrypt.hash(senha, 10);
     }
-    const { data, error } = await supabase
+    let DataErro: TDataErro;
+
+    DataErro = await supabase
       .from('usuario')
       .update({ 
         nome, 
@@ -86,37 +100,39 @@ router.put("/usuario/:id", async (req: Request, res: Response) => {
       })
       .eq('id', id);
 
-    if (error) {
-      res.status(500).send({ mensagem: "Erro ao atualizar o usuário" });
-    } else if (data === null) {
-      res.status(200).send({mensagem: "Usuário atualizado com sucesso"})
+    const resp = tratarResposta(DataErro, false, false);
+    if (resp.mensagem) {
+      res.status(resp.status).send({ mensagem: resp.mensagem });
     } else {
-      res.json(data[0]);
+      res.status(resp.status).json(resp.dados);
     }
+
   } catch (error) {
-    res.status(500).send({ mensagem: "Erro ao atualizar o usuário" });
+    enviarErro500("Erro ao atualizar o usuário")(res);
   }
 })
-
 
 // DELETE /usuario/:id
 router.delete("/usuario/:id", async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
-    const { data, error } = await supabase
+    let DataErro: TDataErro;
+
+    DataErro = await supabase
       .from('usuario')
       .delete()
       .eq('id', id);
 
-    if (error) {
-      res.status(500).send({ mensagem: "Erro ao excluir o usuário" });
+    const resp = tratarResposta(DataErro, false, true);
+    if (resp.mensagem) {
+      res.status(resp.status).send({ mensagem: resp.mensagem });
     } else {
-      res.send({ mensagem: "Usuário excluído com sucesso" });
+      res.status(resp.status).json(resp.dados);
     }
+
   } catch (error) {
-    res.status(500).send({ mensagem: "Erro ao excluir o usuário" });
+    enviarErro500("Erro ao excluir o usuário")(res);
   }
 })
-
 
 export default router;
