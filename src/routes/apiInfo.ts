@@ -3,6 +3,31 @@ import express, { Request, Response, Router } from 'express';
 const router = express.Router();
 
 const endpoints = `
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+    }
+    table {
+      font-size: 14px;
+    }
+    @media only screen and (max-width: 600px) {
+      body {
+        font-size: 14px;
+      }
+      table {
+        font-size: 12px;
+      }
+    }
+    @media only screen and (max-width: 400px) {
+      body {
+        font-size: 12px;
+      }
+      table {
+        font-size: 10px;
+      }
+    }
+  </style>
   <h1 style="text-align: center;">Backend do Postinho de Saúde</h1>
   <div style="margin: 20px;">
     <p>
