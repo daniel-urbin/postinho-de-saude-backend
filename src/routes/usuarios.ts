@@ -233,7 +233,7 @@ router.post('/forgot-password', async (req: Request, res: Response) => {
     // Retornar status 204 sem conteúdo
     res.status(204).send();
   } catch (error) {
-    res.status(500).json({ mensagem: 'Erro ao enviar e-mail de recuperação' });
+    res.status(500).json({ mensagem: `Erro ao enviar e-mail de recuperação teste_error: ${error}` });
   }
 });
 
