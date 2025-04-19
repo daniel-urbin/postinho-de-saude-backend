@@ -7,15 +7,15 @@ const router = express.Router();
 
 router.post('/login', async (req: Request, res: Response) => {
   try {
-    const { nome, senha } = req.body;
+    const { email, password } = req.body;
 
     const { data, error } = await supabase
       .from('usuario')
       .select('*')
-      .eq('nome', nome);
+      .eq('email', email);
 
     if (error) {
-      res.status(500).send({ mensagem: "Erro ao ler a tabela 'usuario'" });
+      res.status(500).send({ mensagem: "Erro ao acessar a tabela 'usuario'" });
       return;
     }
 
@@ -25,28 +25,24 @@ router.post('/login', async (req: Request, res: Response) => {
     }
 
     const user = data[0];
-
-    const passwordMatch = await bcrypt.compare(senha, user.senha);
+    const passwordMatch = await bcrypt.compare(password, user.senha);
 
     if (!passwordMatch) {
-      res.status(422).json({ error: 'Nome ou senha incorreto!' });
+      res.status(422).json({ error: 'Email ou senha incorretos!' });
       return;
     }
 
-    const token = jwt.sign({ nome: user.nome }, process.env.SECRET_KEY!, {
-      expiresIn: '30d',
-    });
-
-    const refreshToken = jwt.sign({ nome: user.nome }, process.env.SECRET_KEY!, {
+    const token = jwt.sign({ email: user.email }, process.env.SECRET_KEY!, {
       expiresIn: '30d',
     });
 
     res.json({
       user: {
+        id: user.id,
         name: user.nome,
+        email: user.email,
       },
       token,
-      refresh_token: refreshToken,
     });
   } catch (error) {
     res.status(500).send({ mensagem: "Erro ao autenticar o usuário" });

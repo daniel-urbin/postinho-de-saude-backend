@@ -76,6 +76,30 @@ router.post('/usuario', async (req: Request, res: Response) => {
   }
 });
 
+// POST register
+router.post('/register', async (req: Request, res: Response) => {
+  try {
+    const { nome, email, senha, cpf, telefone, dataNascimento, endereco } = req.body;
+
+    const senhaCriptografada = await bcrypt.hash(senha, 10);
+
+    const { data, error } = await supabase
+      .from('usuario')
+      .insert([
+        { nome, email, senha: senhaCriptografada, cpf, telefone, dataNascimento, endereco },
+      ]);
+
+    if (error) {
+      res.status(409).json({ mensagem: 'Erro ao registrar o usuário' });
+      return;
+    }
+
+    res.status(201).json({ mensagem: 'Usuário registrado com sucesso', data });
+  } catch (error) {
+    enviarErro500("Erro ao registrar o usuário")(res);
+  }
+});
+
 // PUT /usuario/:id
 router.put("/usuario/:id", async (req: Request, res: Response) => {
   try {
@@ -134,5 +158,44 @@ router.delete("/usuario/:id", async (req: Request, res: Response) => {
     enviarErro500("Erro ao excluir o usuário")(res);
   }
 })
+
+// POST reset-password
+router.post('/reset-password', async (req: Request, res: Response) => {
+  try {
+    const { email, novaSenha } = req.body;
+
+    const senhaCriptografada = await bcrypt.hash(novaSenha, 10);
+
+    const { data, error } = await supabase
+      .from('usuario')
+      .update({ senha: senhaCriptografada })
+      .eq('email', email);
+
+    if (error || !data) {
+      res.status(404).json({ mensagem: 'Usuário não encontrado ou erro ao redefinir senha' });
+      return;
+    }
+
+    res.status(200).json({ mensagem: 'Senha redefinida com sucesso' });
+  } catch (error) {
+    enviarErro500("Erro ao redefinir a senha")(res);
+  }
+});
+
+// POST verify-code
+router.post('/verify-code', async (req: Request, res: Response) => {
+  try {
+    const { code } = req.body;
+
+    // Lógica para verificar o código (exemplo fictício)
+    if (code === '123456') {
+      res.status(200).json({ mensagem: 'Código verificado com sucesso' });
+    } else {
+      res.status(400).json({ mensagem: 'Código inválido' });
+    }
+  } catch (error) {
+    enviarErro500("Erro ao verificar o código")(res);
+  }
+});
 
 export default router;
