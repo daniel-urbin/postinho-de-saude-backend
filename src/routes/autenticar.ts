@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/login', async (req: Request, res: Response) => {
   try {
-    const { email, password } = req.body;
+    const { email, senha } = req.body;
 
     const { data, error } = await supabase
       .from('usuario')
@@ -25,7 +25,7 @@ router.post('/login', async (req: Request, res: Response) => {
     }
 
     const user = data[0];
-    const passwordMatch = await bcrypt.compare(password, user.senha);
+    const passwordMatch = await bcrypt.compare(senha, user.senha);
 
     if (!passwordMatch) {
       res.status(422).json({ error: 'Email ou senha incorretos!' });
