@@ -5,6 +5,7 @@ import { tratarResposta } from '../handlers/tratarResposta';
 import { Usuario } from '../models/usuario';
 import { TDataErro } from '../models/types';
 import { enviarErro500 } from '../helpers/responseHelpers';
+import { enviarEmail } from '../helpers/emailHelper';
 
 const router = express.Router();
 
@@ -162,10 +163,18 @@ router.delete("/usuario/:id", async (req: Request, res: Response) => {
 // POST reset-password
 router.post('/reset-password', async (req: Request, res: Response) => {
   try {
-    const { email, novaSenha } = req.body;
+    const { email, novaSenha, codigoRecuperacao } = req.body;
 
+    // Verificar se o código de recuperação é válido (exemplo fictício)
+    if (codigoRecuperacao !== '123456') {
+      res.status(400).json({ mensagem: 'Código de recuperação inválido' });
+      return;
+    }
+
+    // Criptografar a nova senha
     const senhaCriptografada = await bcrypt.hash(novaSenha, 10);
 
+    // Atualizar a senha no banco de dados
     const { data, error } = await supabase
       .from('usuario')
       .update({ senha: senhaCriptografada })
@@ -176,9 +185,10 @@ router.post('/reset-password', async (req: Request, res: Response) => {
       return;
     }
 
-    res.status(200).json({ mensagem: 'Senha redefinida com sucesso' });
+    // Retornar status 204 sem conteúdo
+    res.status(204).send();
   } catch (error) {
-    enviarErro500("Erro ao redefinir a senha")(res);
+    res.status(500).json({ mensagem: 'Erro ao redefinir a senha' });
   }
 });
 
@@ -195,6 +205,35 @@ router.post('/verify-code', async (req: Request, res: Response) => {
     }
   } catch (error) {
     enviarErro500("Erro ao verificar o código")(res);
+  }
+});
+
+// POST forgot-password
+router.post('/forgot-password', async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body;
+
+    // Verificar se o e-mail existe no banco de dados
+    const { data, error } = await supabase
+      .from('usuario')
+      .select('id')
+      .eq('email', email);
+
+    if (error || !data || data.length === 0) {
+      res.status(404).json({ mensagem: 'E-mail não encontrado' });
+      return;
+    }
+
+    // Gerar um código de recuperação (exemplo simples)
+    const codigoRecuperacao = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // Enviar o e-mail com o código de recuperação
+    await enviarEmail(email, 'Recuperação de Senha', `Seu código de recuperação é: ${codigoRecuperacao}`);
+
+    // Retornar status 204 sem conteúdo
+    res.status(204).send();
+  } catch (error) {
+    res.status(500).json({ mensagem: 'Erro ao enviar e-mail de recuperação' });
   }
 });
 

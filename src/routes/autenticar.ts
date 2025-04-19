@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import supabase from '../configs/supabase.config';
+import { enviarEmail } from '../helpers/emailHelper';
 
 const router = express.Router();
 
@@ -61,6 +62,34 @@ router.get('/protected', (req: Request, res: Response) => {
     } catch (error) {
       res.status(401).json({ error: 'Token inválido' });
     }
+  }
+});
+
+router.post('/forgot-password', async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body;
+
+    // Verificar se o e-mail existe no banco de dados
+    const { data, error } = await supabase
+      .from('usuario')
+      .select('id')
+      .eq('email', email);
+
+    if (error || !data || data.length === 0) {
+      res.status(404).json({ mensagem: 'E-mail não encontrado' });
+      return;
+    }
+
+    // Gerar um código de recuperação (exemplo simples)
+    const codigoRecuperacao = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // Enviar o e-mail com o código de recuperação
+    await enviarEmail(email, 'Recuperação de Senha', `Seu código de recuperação é: ${codigoRecuperacao}`);
+
+    // Retornar status 204 sem conteúdo
+    res.status(204).send();
+  } catch (error) {
+    res.status(500).json({ mensagem: 'Erro ao enviar e-mail de recuperação' });
   }
 });
 
