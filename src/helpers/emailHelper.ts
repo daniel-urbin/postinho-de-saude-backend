@@ -1,9 +1,33 @@
+import nodemailer from 'nodemailer';
+
 /**
- * Função para enviar e-mails (a ser configurada com SendGrid).
+ * Função para enviar e-mails usando Gmail (SMTP).
  * @param destinatario - E-mail do destinatário.
  * @param assunto - Assunto do e-mail.
  * @param mensagem - Conteúdo do e-mail.
  */
 export async function enviarEmail(destinatario: string, assunto: string, mensagem: string) {
-  console.log('Função enviarEmail ainda não configurada.');
+  try {
+    const transporter = nodemailer.createTransport({
+      host: process.env.EMAIL_HOST,
+      port: parseInt(process.env.EMAIL_PORT!, 10),
+      secure: false, // false para TLS, true para SSL
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const info = await transporter.sendMail({
+      from: process.env.EMAIL_USER, // Remetente
+      to: destinatario, // Destinatário
+      subject: assunto, // Assunto
+      text: mensagem, // Texto do e-mail
+    });
+
+    console.log('E-mail enviado com sucesso:', info.messageId);
+  } catch (error) {
+    console.error('Erro ao enviar e-mail:', error);
+    throw new Error('Erro ao enviar e-mail');
+  }
 }
