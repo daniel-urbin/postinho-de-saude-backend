@@ -28,6 +28,6 @@ export async function enviarEmail(destinatario: string, assunto: string, mensage
     console.log('E-mail enviado com sucesso:', info.messageId);
   } catch (error) {
     console.error('Erro ao enviar e-mail:', error);
-    throw new Error('Erro ao enviar e-mail');
+    throw new Error(`Erro ao enviar e-mail: ${error}`);
   }
 }
