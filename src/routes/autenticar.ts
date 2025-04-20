@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post('/login', async (req: Request, res: Response) => {
   try {
-    const { email, senha } = req.body;
+    const { email, password: senha } = req.body;
 
     const { data, error } = await supabase
       .from('usuario')
@@ -37,13 +37,24 @@ router.post('/login', async (req: Request, res: Response) => {
       expiresIn: '30d',
     });
 
+    // Retornar os campos esperados no formato correto
     res.json({
+      token,
       user: {
         id: user.id,
         name: user.nome,
         email: user.email,
+        phone: user.telefone,
+        birthdate: user.dataNascimento,
+        document: user.cpf,
+        role: user.tipo,
+        address: user.endereco,
+        admin: user.tipo === 'admin' ? user.id : null,
+        doctor: user.tipo === 'medico' ? user.id : null,
+        patient: user.tipo === 'paciente' ? user.id : null,
+        createdAt: user.created_at, // Certifique-se de que o campo existe no banco
+        updatedAt: user.updated_at, // Certifique-se de que o campo existe no banco
       },
-      token,
     });
   } catch (error) {
     res.status(500).send({ mensagem: "Erro ao autenticar o usuário" });
