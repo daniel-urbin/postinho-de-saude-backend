@@ -6,6 +6,7 @@ import { enviarEmail } from '../helpers/emailHelper';
 
 const router = express.Router();
 
+// Endpoint de login
 router.post('/login', async (req: Request, res: Response) => {
   try {
     const { email, password: senha } = req.body;
@@ -29,7 +30,7 @@ router.post('/login', async (req: Request, res: Response) => {
     const passwordMatch = await bcrypt.compare(senha, user.senha);
 
     if (!passwordMatch) {
-      res.status(422).json({ error:  `Email ou senha incorretos!` });
+      res.status(422).json({ error: 'Email ou senha incorretos!' });
       return;
     }
 
@@ -61,26 +62,28 @@ router.post('/login', async (req: Request, res: Response) => {
   }
 });
 
+// Endpoint protegido
 router.get('/protected', (req: Request, res: Response) => {
   const token = req.header('Authorization');
 
   if (!token) {
     res.status(401).json({ error: 'Token não fornecido' });
-  } else {
-    try {
-      const decoded = jwt.verify(token, process.env.SECRET_KEY!) as jwt.JwtPayload;
-      res.json({ message: `Olá, ${decoded.nome}!` });
-    } catch (error) {
-      res.status(401).json({ error: 'Token inválido' });
-    }
+    return;
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.SECRET_KEY!) as jwt.JwtPayload;
+    res.json({ message: `Olá, ${decoded.email}!` });
+  } catch (error) {
+    res.status(401).json({ error: 'Token inválido' });
   }
 });
 
+// Endpoint para recuperação de senha
 router.post('/forgot-password', async (req: Request, res: Response) => {
   try {
     const { email } = req.body;
 
-    // Verificar se o e-mail existe no banco de dados
     const { data, error } = await supabase
       .from('usuario')
       .select('id')
@@ -91,16 +94,13 @@ router.post('/forgot-password', async (req: Request, res: Response) => {
       return;
     }
 
-    // Gerar um código de recuperação (exemplo simples)
     const codigoRecuperacao = Math.floor(100000 + Math.random() * 900000).toString();
 
-    // Enviar o e-mail com o código de recuperação
     await enviarEmail(email, 'Recuperação de Senha', `Seu código de recuperação é: ${codigoRecuperacao}`);
 
-    // Retornar status 204 sem conteúdo
     res.status(204).send();
   } catch (error) {
-    res.status(500).json({ mensagem: `Erro ao enviar e-mail de recuperação teste_321: ${error}` });
+    res.status(500).json({ mensagem: `Erro ao enviar e-mail de recuperação: ${error}` });
   }
 });
 
