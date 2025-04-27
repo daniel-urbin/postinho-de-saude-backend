@@ -31,7 +31,7 @@ router.post('/login', async (req: Request, res: Response) => {
     const passwordMatch = await bcrypt.compare(senha, user.senha);
 
     teste = await bcrypt.hash(senha, 10);
-console.log('Senha criptografada:', teste);
+console.log('Senha criptografada1:', teste);
 
     if (!passwordMatch) {
       res.status(422).json({ error: 'Email ou senha incorretos!' });
@@ -62,7 +62,7 @@ console.log('Senha criptografada:', teste);
       },
     });
   } catch (error) {
-console.log('Senha criptografada:', teste);
+console.log('Senha criptografada2:', teste);
     res.status(500).send({ mensagem: "Erro ao autenticar o usuário" });
   }
 });
