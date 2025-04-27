@@ -30,10 +30,10 @@ router.post('/login_teste', async (req: Request, res: Response) => {
     const passwordMatch = await bcrypt.compare(senha, user.senha);
 
 
-//    if (!passwordMatch) {
-//      res.status(422).json({ error: 'Email ou senha incorretos!' });
-//      return;
-//    }
+    if (!passwordMatch) {
+      res.status(422).json({ error: 'Email ou senha incorretos!' });
+      return;
+    }
 
     const token = jwt.sign({ email: user.email }, process.env.SECRET_KEY!, {
       expiresIn: '30d',
