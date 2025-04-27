@@ -6,6 +6,7 @@ import professionalsRouter from './routes/professionals';
 import appointmentsRouter from './routes/appointments';
 import specialtiesRouter from './routes/specialties'; // Importar a nova rota
 import apiInfo from './routes/apiInfo'
+import cors from 'cors';
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(apiInfo);
 
 const apiV1Router = express.Router();
+apiV1Router.use(cors());
 apiV1Router.use('/usuarios', usuariosRouter);
 apiV1Router.use('/auth', authRouter);
 apiV1Router.use('/units', unitsRouter);
