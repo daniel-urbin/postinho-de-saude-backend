@@ -59,7 +59,7 @@ router.post('/login', async (req: Request, res: Response) => {
       },
     });
   } catch (error) {
-console.log('Senha criptografada2:', teste);
+
     res.status(500).send({ mensagem: "Erro ao autenticar o usuário" });
   }
 });
