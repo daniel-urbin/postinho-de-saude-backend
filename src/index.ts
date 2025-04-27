@@ -5,12 +5,14 @@ import unitsRouter from './routes/units';
 import professionalsRouter from './routes/professionals';
 import appointmentsRouter from './routes/appointments';
 import specialtiesRouter from './routes/specialties'; // Importar a nova rota
+import apiInfo from './routes/apiInfo'
 
 const app = express();
 const port = process.env.PORT || 3001;
 
 // Middleware para parsear o corpo das solicitações
 app.use(express.json());
+app.use(apiInfo);
 app.use(usuariosRouter);
 app.use(authRouter);
 app.use(unitsRouter);
