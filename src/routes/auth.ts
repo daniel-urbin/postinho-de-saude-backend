@@ -5,6 +5,7 @@ import supabase from '../configs/supabase.config';
 import { enviarEmail } from '../helpers/emailHelper';
 
 const router = express.Router();
+let teste ='';
 
 // Endpoint de login
 router.post('/login', async (req: Request, res: Response) => {
@@ -29,7 +30,7 @@ router.post('/login', async (req: Request, res: Response) => {
     const user = data[0];
     const passwordMatch = await bcrypt.compare(senha, user.senha);
 
-    const teste = await bcrypt.hash(senha, 10);
+    teste = await bcrypt.hash(senha, 10);
 console.log('Senha criptografada:', teste);
 
     if (!passwordMatch) {
@@ -61,6 +62,7 @@ console.log('Senha criptografada:', teste);
       },
     });
   } catch (error) {
+console.log('Senha criptografada:', teste);
     res.status(500).send({ mensagem: "Erro ao autenticar o usuário" });
   }
 });
