@@ -13,12 +13,16 @@ const port = process.env.PORT || 3001;
 // Middleware para parsear o corpo das solicitações
 app.use(express.json());
 app.use(apiInfo);
-app.use(usuariosRouter);
-app.use(authRouter);
-app.use(unitsRouter);
-app.use(professionalsRouter);
-app.use(appointmentsRouter);
-app.use(specialtiesRouter); // Registrar a nova rota
+
+const apiV1Router = express.Router();
+apiV1Router.use('/usuarios', usuariosRouter);
+apiV1Router.use('/auth', authRouter);
+apiV1Router.use('/units', unitsRouter);
+apiV1Router.use('/professionals', professionalsRouter);
+apiV1Router.use('/appointments', appointmentsRouter);
+apiV1Router.use('/specialties', specialtiesRouter);
+
+app.use('/api/v1', apiV1Router);
 
 // Inicializar o servidor
 app.listen(port, () => {
