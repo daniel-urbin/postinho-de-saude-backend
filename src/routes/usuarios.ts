@@ -89,6 +89,11 @@ router.post('/register', async (req: Request, res: Response) => {
       .insert([
         { nome, email, senha: senhaCriptografada, cpf, telefone, dataNascimento, endereco },
       ]);
+   
+      
+console.log('Dados antes da inserção:', { nome, email, senha: senhaCriptografada, cpf, telefone, dataNascimento, endereco });
+console.log('Resposta do Supabase:', data, error);
+
 
     if (error) {
       console.log(error); //teste
