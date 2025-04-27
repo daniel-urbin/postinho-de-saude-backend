@@ -22,6 +22,12 @@ apiV1Router.use('/professionals', professionalsRouter);
 apiV1Router.use('/appointments', appointmentsRouter);
 apiV1Router.use('/specialties', specialtiesRouter);
 
+
+// so para teste
+apiV1Router.get('/teste', (req, res) => {
+  res.json({ message: 'API v1 funcionando corretamente!' });
+});
+
 app.use('/api/v1', apiV1Router);
 
 // Inicializar o servidor
