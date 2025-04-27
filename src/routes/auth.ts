@@ -5,7 +5,6 @@ import supabase from '../configs/supabase.config';
 import { enviarEmail } from '../helpers/emailHelper';
 
 const router = express.Router();
-let teste ='';
 
 // Endpoint de login
 router.post('/login', async (req: Request, res: Response) => {
@@ -30,13 +29,11 @@ router.post('/login', async (req: Request, res: Response) => {
     const user = data[0];
     const passwordMatch = await bcrypt.compare(senha, user.senha);
 
-    teste = await bcrypt.hash(senha, 10);
-console.log('Senha criptografada1:', teste);
 
-    if (!passwordMatch) {
-      res.status(422).json({ error: 'Email ou senha incorretos!' });
-      return;
-    }
+//    if (!passwordMatch) {
+//      res.status(422).json({ error: 'Email ou senha incorretos!' });
+//      return;
+//    }
 
     const token = jwt.sign({ email: user.email }, process.env.SECRET_KEY!, {
       expiresIn: '30d',
