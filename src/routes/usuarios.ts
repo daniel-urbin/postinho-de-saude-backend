@@ -80,18 +80,18 @@ router.post('/usuario', async (req: Request, res: Response) => {
 // POST register
 router.post('/register', async (req: Request, res: Response) => {
   try {
-    const { nome, email, senha, cpf, telefone, dataNascimento, endereco } = req.body;
+    const { nome, email, senha, documento, telefone, dataNascimento, endereco } = req.body;
 
     const senhaCriptografada = await bcrypt.hash(senha, 10);
 
     const { data, error } = await supabase
       .from('usuario')
       .insert([
-        { nome, email, senha: senhaCriptografada, cpf, telefone, dataNascimento, endereco },
+        { nome, email, senha: senhaCriptografada, documento, telefone, dataNascimento, endereco },
       ]);
    
       
-console.log('Dados antes da inserção:', { nome, email, senha: senhaCriptografada, cpf, telefone, dataNascimento, endereco });
+console.log('Dados antes da inserção:', { nome, email, senha: senhaCriptografada, documento, telefone, dataNascimento, endereco });
 console.log('Resposta do Supabase:', data, error);
 
 
@@ -111,7 +111,7 @@ console.log('Resposta do Supabase:', data, error);
 router.put("/usuario/:id", async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
-    const { nome, email, senha, cpf, telefone, dataNascimento, endereco } = req.body;
+    const { nome, email, senha, documento, telefone, dataNascimento, endereco } = req.body;
     let senhaCriptografada;
     if (senha) {
       senhaCriptografada = await bcrypt.hash(senha, 10);
@@ -124,7 +124,7 @@ router.put("/usuario/:id", async (req: Request, res: Response) => {
         nome, 
         email, 
         senha: senhaCriptografada || undefined, 
-        cpf, 
+        documento, 
         telefone, 
         dataNascimento, 
         endereco 

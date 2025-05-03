@@ -48,7 +48,7 @@ router.post('/login', async (req: Request, res: Response) => {
         email: user.email,
         phone: user.telefone,
         birthdate: user.dataNascimento,
-        document: user.cpf,
+        document: user.documento,
         role: user.tipo,
         address: user.endereco,
         admin: user.tipo === 'admin' ? user.id : null,
