@@ -80,23 +80,53 @@ router.post('/usuario', async (req: Request, res: Response) => {
 // POST register
 router.post('/register', async (req: Request, res: Response) => {
   try {
-    const { nome, email, senha, documento, telefone, dataNascimento, endereco_id } = req.body;
+    const { name, email, password, document, phone, birthdate, address, role } = req.body;
 
-    const senhaCriptografada = await bcrypt.hash(senha, 10);
+    const encryptedPassword = await bcrypt.hash(password, 10);
+
+    const { zip_code, street, number, district, city, state } = address;
+
+    const { data: addressData, error: addressError } = await supabase
+      .from('endereco')
+      .insert([
+        {
+          cep: zip_code,
+          rua: street,
+          numero: number,
+          bairro: district,
+          cidade: city,
+          estado: state
+        }
+      ]);
+
+    if (addressError) {
+      console.log(addressError);
+      res.status(409).json({ mensagem: 'Erro ao registrar o endereço' });
+      return;
+    }
+
+    const { id: addressId } = addressData![0];
 
     const { data, error } = await supabase
       .from('usuario')
       .insert([
-        { nome, email, senha: senhaCriptografada, documento, telefone, dataNascimento, endereco_id },
+        { 
+          nome: name,
+          email,
+          senha: encryptedPassword,
+          documento: document,
+          telefone: phone,
+          dataNascimento: birthdate,
+          endereco_id: addressId,
+          tipo: role
+        },
       ]);
-   
-      
-console.log('Dados antes da inserção:', { nome, email, senha: senhaCriptografada, documento, telefone, dataNascimento, endereco_id });
-console.log('Resposta do Supabase:', data, error);
-
 
     if (error) {
-      console.log(error); //teste
+      console.log(error);
+      if (addressId) {
+        await supabase.from('endereco').delete().eq('id', addressId);
+      }
       res.status(409).json({ mensagem: 'Erro ao registrar o usuário' });
       return;
     }
