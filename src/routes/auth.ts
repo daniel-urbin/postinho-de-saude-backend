@@ -3,8 +3,70 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import supabase from '../configs/supabase.config';
 import { enviarEmail } from '../helpers/emailHelper';
+import { enviarErro500 } from '../helpers/responseHelpers';
 
 const router = express.Router();
+
+
+// POST register
+router.post('/register', async (req: Request, res: Response) => {
+  try {
+    const { name, email, password, document, phone, birthdate, address, role } = req.body;
+
+    const encryptedPassword = await bcrypt.hash(password, 10);
+
+    const { zip_code, street, number, district, city, state } = address;
+
+    const { data: addressData, error: addressError } = await supabase
+      .from('endereco')
+      .insert([
+        {
+          cep: zip_code,
+          rua: street,
+          numero: number,
+          bairro: district,
+          cidade: city,
+          estado: state
+        }
+      ]);
+
+    if (addressError) {
+      console.log(addressError);
+      res.status(409).json({ mensagem: 'Erro ao registrar o endereço' });
+      return;
+    }
+
+    const { id: addressId } = addressData![0];
+
+    const { data, error } = await supabase
+      .from('usuario')
+      .insert([
+        { 
+          nome: name,
+          email,
+          senha: encryptedPassword,
+          documento: document,
+          telefone: phone,
+          dataNascimento: birthdate,
+          endereco_id: addressId,
+          tipo: role
+        },
+      ]);
+
+    if (error) {
+      console.log(error);
+      if (addressId) {
+        await supabase.from('endereco').delete().eq('id', addressId);
+      }
+      res.status(409).json({ mensagem: 'Erro ao registrar o usuário' });
+      return;
+    }
+
+    res.status(201).json({ mensagem: 'Usuário registrado com sucesso', data });
+  } catch (error) {
+    enviarErro500("Erro ao registrar o usuário")(res);
+  }
+});
 
 // Endpoint de login
 router.post('/login', async (req: Request, res: Response) => {
