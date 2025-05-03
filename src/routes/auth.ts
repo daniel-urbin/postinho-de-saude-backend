@@ -50,7 +50,7 @@ router.post('/login', async (req: Request, res: Response) => {
         birthdate: user.dataNascimento,
         document: user.documento,
         role: user.tipo,
-        address: user.endereco,
+        address: user.endereco_id,
         admin: user.tipo === 'admin' ? user.id : null,
         doctor: user.tipo === 'medico' ? user.id : null,
         patient: user.tipo === 'paciente' ? user.id : null,

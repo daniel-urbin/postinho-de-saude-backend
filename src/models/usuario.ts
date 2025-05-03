@@ -5,5 +5,5 @@ export interface Usuario {
   documento: string;
   telefone: string;
   dataNascimento: string;
-  endereco: string;
+  endereco_id: string;
 }
