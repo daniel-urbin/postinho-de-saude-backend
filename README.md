@@ -29,4 +29,3 @@ Resumo: O projeto tem por finalidade desenvolver um software para o agendamento 
 Caxias do Sul
 
 Projeto original inicio 2024 Criação do repositorio inicio 2025
-

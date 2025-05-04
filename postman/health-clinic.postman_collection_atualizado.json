@@ -1,209 +1,209 @@
 {
-    "info": {
-        "_postman_id": "f4a735b2-bc9a-4ab5-b9cd-20f1515478df",
-        "name": "postinho-de-saude",
-        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-    },
-    "item": [
+  "info": {
+    "_postman_id": "f4a735b2-bc9a-4ab5-b9cd-20f1515478df",
+    "name": "postinho-de-saude",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
         {
-            "name": "auth",
-            "item": [
-                {
-                    "name": "login",
-                    "request": {
-                        "method": "POST",
-                        "url": "{{base_url}}/auth/login"
-                    }
-                },
-                {
-                    "name": "register",
-                    "request": {
-                        "method": "POST",
-                        "url": "{{base_url}}/auth/register"
-                    }
-                },
-                {
-                    "name": "forgot-password",
-                    "request": {
-                        "method": "POST",
-                        "url": "{{base_url}}/auth/forgot-password"
-                    }
-                },
-                {
-                    "name": "verify-code",
-                    "request": {
-                        "method": "POST",
-                        "url": "{{base_url}}/auth/verify-code"
-                    }
-                },
-                {
-                    "name": "reset-password",
-                    "request": {
-                        "method": "POST",
-                        "url": "{{base_url}}/auth/reset-password"
-                    }
-                }
-            ]
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/auth/login"
+          }
         },
         {
-            "name": "units",
-            "item": [
-                {
-                    "name": "get-units",
-                    "request": {
-                        "method": "GET",
-                        "url": "{{base_url}}/units"
-                    }
-                },
-                {
-                    "name": "get-unit-by-id",
-                    "request": {
-                        "method": "GET",
-                        "url": "{{base_url}}/units/:id"
-                    }
-                },
-                {
-                    "name": "create-unit",
-                    "request": {
-                        "method": "POST",
-                        "url": "{{base_url}}/units"
-                    }
-                },
-                {
-                    "name": "update-unit",
-                    "request": {
-                        "method": "PUT",
-                        "url": "{{base_url}}/units/:id"
-                    }
-                },
-                {
-                    "name": "delete-unit",
-                    "request": {
-                        "method": "DELETE",
-                        "url": "{{base_url}}/units/:id"
-                    }
-                }
-            ]
+          "name": "register",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/auth/register"
+          }
         },
         {
-            "name": "professionals",
-            "item": [
-                {
-                    "name": "get-professionals",
-                    "request": {
-                        "method": "GET",
-                        "url": "{{base_url}}/professionals"
-                    }
-                },
-                {
-                    "name": "get-professional-by-id",
-                    "request": {
-                        "method": "GET",
-                        "url": "{{base_url}}/professionals/:id"
-                    }
-                },
-                {
-                    "name": "create-professional",
-                    "request": {
-                        "method": "POST",
-                        "url": "{{base_url}}/professionals"
-                    }
-                },
-                {
-                    "name": "update-professional",
-                    "request": {
-                        "method": "PUT",
-                        "url": "{{base_url}}/professionals/:id"
-                    }
-                },
-                {
-                    "name": "delete-professional",
-                    "request": {
-                        "method": "DELETE",
-                        "url": "{{base_url}}/professionals/:id"
-                    }
-                }
-            ]
+          "name": "forgot-password",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/auth/forgot-password"
+          }
         },
         {
-            "name": "appointments",
-            "item": [
-                {
-                    "name": "get-appointments",
-                    "request": {
-                        "method": "GET",
-                        "url": "{{base_url}}/appointments"
-                    }
-                },
-                {
-                    "name": "get-appointment-by-id",
-                    "request": {
-                        "method": "GET",
-                        "url": "{{base_url}}/appointments/:id"
-                    }
-                },
-                {
-                    "name": "create-appointment",
-                    "request": {
-                        "method": "POST",
-                        "url": "{{base_url}}/appointments"
-                    }
-                },
-                {
-                    "name": "update-appointment",
-                    "request": {
-                        "method": "PUT",
-                        "url": "{{base_url}}/appointments/:id"
-                    }
-                },
-                {
-                    "name": "update-appointment-status",
-                    "request": {
-                        "method": "PATCH",
-                        "url": "{{base_url}}/appointments/:id/status"
-                    }
-                },
-                {
-                    "name": "delete-appointment",
-                    "request": {
-                        "method": "DELETE",
-                        "url": "{{base_url}}/appointments/:id"
-                    }
-                }
-            ]
+          "name": "verify-code",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/auth/verify-code"
+          }
         },
         {
-            "name": "specialties",
-            "item": [
-                {
-                    "name": "get-specialties",
-                    "request": {
-                        "method": "GET",
-                        "url": "{{base_url}}/specialties"
-                    }
-                },
-                {
-                    "name": "create-specialty",
-                    "request": {
-                        "method": "POST",
-                        "url": "{{base_url}}/specialties"
-                    }
-                },
-                {
-                    "name": "update-specialty",
-                    "request": {
-                        "method": "PUT",
-                        "url": "{{base_url}}/specialties/:id"
-                    }
-                },
-                {
-                    "name": "delete-specialty",
-                    "request": {
-                        "method": "DELETE",
-                        "url": "{{base_url}}/specialties/:id"
-                    }
-                }
-            ]
+          "name": "reset-password",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/auth/reset-password"
+          }
         }
-    ]
+      ]
+    },
+    {
+      "name": "units",
+      "item": [
+        {
+          "name": "get-units",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/units"
+          }
+        },
+        {
+          "name": "get-unit-by-id",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/units/:id"
+          }
+        },
+        {
+          "name": "create-unit",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/units"
+          }
+        },
+        {
+          "name": "update-unit",
+          "request": {
+            "method": "PUT",
+            "url": "{{base_url}}/units/:id"
+          }
+        },
+        {
+          "name": "delete-unit",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/units/:id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "professionals",
+      "item": [
+        {
+          "name": "get-professionals",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/professionals"
+          }
+        },
+        {
+          "name": "get-professional-by-id",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/professionals/:id"
+          }
+        },
+        {
+          "name": "create-professional",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/professionals"
+          }
+        },
+        {
+          "name": "update-professional",
+          "request": {
+            "method": "PUT",
+            "url": "{{base_url}}/professionals/:id"
+          }
+        },
+        {
+          "name": "delete-professional",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/professionals/:id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "appointments",
+      "item": [
+        {
+          "name": "get-appointments",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/appointments"
+          }
+        },
+        {
+          "name": "get-appointment-by-id",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/appointments/:id"
+          }
+        },
+        {
+          "name": "create-appointment",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/appointments"
+          }
+        },
+        {
+          "name": "update-appointment",
+          "request": {
+            "method": "PUT",
+            "url": "{{base_url}}/appointments/:id"
+          }
+        },
+        {
+          "name": "update-appointment-status",
+          "request": {
+            "method": "PATCH",
+            "url": "{{base_url}}/appointments/:id/status"
+          }
+        },
+        {
+          "name": "delete-appointment",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/appointments/:id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "specialties",
+      "item": [
+        {
+          "name": "get-specialties",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/specialties"
+          }
+        },
+        {
+          "name": "create-specialty",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/specialties"
+          }
+        },
+        {
+          "name": "update-specialty",
+          "request": {
+            "method": "PUT",
+            "url": "{{base_url}}/specialties/:id"
+          }
+        },
+        {
+          "name": "delete-specialty",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/specialties/:id"
+          }
+        }
+      ]
+    }
+  ]
 }

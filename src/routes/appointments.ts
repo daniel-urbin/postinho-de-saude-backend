@@ -77,7 +77,9 @@ router.put('/appointments/:id', async (req: Request, res: Response) => {
       .single();
 
     if (error || !updatedData) {
-      res.status(404).json({ mensagem: 'Erro ao atualizar agendamento', error });
+      res
+        .status(404)
+        .json({ mensagem: 'Erro ao atualizar agendamento', error });
       return;
     }
 
@@ -88,28 +90,33 @@ router.put('/appointments/:id', async (req: Request, res: Response) => {
 });
 
 // PATCH /appointments/:id/status - Atualiza o status de um agendamento
-router.patch('/appointments/:id/status', async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    const { status } = req.body;
+router.patch(
+  '/appointments/:id/status',
+  async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const { status } = req.body;
 
-    const { data: updatedData, error } = await supabase
-      .from('agendamento')
-      .update({ status })
-      .eq('id', id)
-      .select()
-      .single();
+      const { data: updatedData, error } = await supabase
+        .from('agendamento')
+        .update({ status })
+        .eq('id', id)
+        .select()
+        .single();
 
-    if (error || !updatedData) {
-      res.status(404).json({ mensagem: 'Erro ao atualizar status do agendamento', error });
-      return;
+      if (error || !updatedData) {
+        res
+          .status(404)
+          .json({ mensagem: 'Erro ao atualizar status do agendamento', error });
+        return;
+      }
+
+      res.json(updatedData);
+    } catch (error) {
+      res.status(500).json({ mensagem: 'Erro interno no servidor', error });
     }
-
-    res.json(updatedData);
-  } catch (error) {
-    res.status(500).json({ mensagem: 'Erro interno no servidor', error });
   }
-});
+);
 
 // DELETE /appointments/:id - Exclui um agendamento
 router.delete('/appointments/:id', async (req: Request, res: Response) => {

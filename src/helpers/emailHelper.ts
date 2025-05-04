@@ -6,7 +6,11 @@ import nodemailer from 'nodemailer';
  * @param assunto - Assunto do e-mail.
  * @param mensagem - Conteúdo do e-mail.
  */
-export async function enviarEmail(destinatario: string, assunto: string, mensagem: string) {
+export async function enviarEmail(
+  destinatario: string,
+  assunto: string,
+  mensagem: string
+) {
   try {
     const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST,

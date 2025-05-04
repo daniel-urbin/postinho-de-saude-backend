@@ -12,7 +12,9 @@ router.get('/specialties', async (req: Request, res: Response) => {
       .eq('tipo', 'medico');
 
     if (error) {
-      res.status(500).json({ mensagem: 'Erro ao buscar especialidades', error });
+      res
+        .status(500)
+        .json({ mensagem: 'Erro ao buscar especialidades', error });
       return;
     }
 
@@ -64,7 +66,9 @@ router.put('/specialties/:id', async (req: Request, res: Response) => {
       .single();
 
     if (error || !data) {
-      res.status(404).json({ mensagem: 'Erro ao atualizar especialidade', error });
+      res
+        .status(404)
+        .json({ mensagem: 'Erro ao atualizar especialidade', error });
       return;
     }
 
@@ -88,7 +92,9 @@ router.delete('/specialties/:id', async (req: Request, res: Response) => {
       .single();
 
     if (error || !data) {
-      res.status(404).json({ mensagem: 'Erro ao excluir especialidade', error });
+      res
+        .status(404)
+        .json({ mensagem: 'Erro ao excluir especialidade', error });
       return;
     }
 

@@ -14,9 +14,7 @@ router.get('/usuarios', async (req: Request, res: Response) => {
   try {
     let DataErro: TDataErro;
 
-    DataErro = await supabase
-      .from('usuario')
-      .select('*');
+    DataErro = await supabase.from('usuario').select('*');
 
     const resp = tratarResposta(DataErro, true, false);
     if (resp.mensagem) {
@@ -24,22 +22,18 @@ router.get('/usuarios', async (req: Request, res: Response) => {
     } else {
       res.status(resp.status).json(resp.dados);
     }
-
   } catch (error) {
     enviarErro500("Erro ao ler a tabela 'usuario'")(res);
   }
 });
 
 // GET usuario
-router.get("/usuario/:id", async (req: Request, res: Response) => {
+router.get('/usuario/:id', async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
     let DataErro: TDataErro;
 
-    DataErro = await supabase
-      .from('usuario')
-      .select('*')
-      .eq('id', id);
+    DataErro = await supabase.from('usuario').select('*').eq('id', id);
 
     const resp = tratarResposta(DataErro, true, false);
     if (resp.mensagem) {
@@ -47,23 +41,19 @@ router.get("/usuario/:id", async (req: Request, res: Response) => {
     } else {
       res.status(resp.status).json(resp.dados);
     }
-
   } catch (error) {
     enviarErro500("Erro ao ler a tabela 'usuario'")(res);
   }
-})
+});
 
 // POST usuario
 router.post('/usuario', async (req: Request, res: Response) => {
-
   try {
     const usu: Usuario = req.body as Usuario;
     usu.senha = await bcrypt.hash(usu.senha, 10);
     let DataErro: TDataErro;
 
-    DataErro = await supabase
-      .from('usuario')
-      .insert([usu]);
+    DataErro = await supabase.from('usuario').insert([usu]);
 
     const resp = tratarResposta(DataErro, false, false);
     if (resp.mensagem) {
@@ -71,47 +61,24 @@ router.post('/usuario', async (req: Request, res: Response) => {
     } else {
       res.status(resp.status).json(resp.dados);
     }
-
   } catch (error) {
-    enviarErro500("Erro ao inserir o usuário")(res);
-  }
-});
-
-// POST register
-router.post('/register', async (req: Request, res: Response) => {
-  try {
-    const { nome, email, senha, documento, telefone, dataNascimento, endereco_id } = req.body;
-
-    const senhaCriptografada = await bcrypt.hash(senha, 10);
-
-    const { data, error } = await supabase
-      .from('usuario')
-      .insert([
-        { nome, email, senha: senhaCriptografada, documento, telefone, dataNascimento, endereco_id },
-      ]);
-   
-      
-console.log('Dados antes da inserção:', { nome, email, senha: senhaCriptografada, documento, telefone, dataNascimento, endereco_id });
-console.log('Resposta do Supabase:', data, error);
-
-
-    if (error) {
-      console.log(error); //teste
-      res.status(409).json({ mensagem: 'Erro ao registrar o usuário' });
-      return;
-    }
-
-    res.status(201).json({ mensagem: 'Usuário registrado com sucesso', data });
-  } catch (error) {
-    enviarErro500("Erro ao registrar o usuário")(res);
+    enviarErro500('Erro ao inserir o usuário')(res);
   }
 });
 
 // PUT /usuario/:id
-router.put("/usuario/:id", async (req: Request, res: Response) => {
+router.put('/usuario/:id', async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
-    const { nome, email, senha, documento, telefone, dataNascimento, endereco_id } = req.body;
+    const {
+      nome,
+      email,
+      senha,
+      documento,
+      telefone,
+      dataNascimento,
+      endereco_id,
+    } = req.body;
     let senhaCriptografada;
     if (senha) {
       senhaCriptografada = await bcrypt.hash(senha, 10);
@@ -120,14 +87,14 @@ router.put("/usuario/:id", async (req: Request, res: Response) => {
 
     DataErro = await supabase
       .from('usuario')
-      .update({ 
-        nome, 
-        email, 
-        senha: senhaCriptografada || undefined, 
-        documento, 
-        telefone, 
-        dataNascimento, 
-        endereco_id 
+      .update({
+        nome,
+        email,
+        senha: senhaCriptografada || undefined,
+        documento,
+        telefone,
+        dataNascimento,
+        endereco_id,
       })
       .eq('id', id);
 
@@ -137,22 +104,18 @@ router.put("/usuario/:id", async (req: Request, res: Response) => {
     } else {
       res.status(resp.status).json(resp.dados);
     }
-
   } catch (error) {
-    enviarErro500("Erro ao atualizar o usuário")(res);
+    enviarErro500('Erro ao atualizar o usuário')(res);
   }
-})
+});
 
 // DELETE /usuario/:id
-router.delete("/usuario/:id", async (req: Request, res: Response) => {
+router.delete('/usuario/:id', async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
     let DataErro: TDataErro;
 
-    DataErro = await supabase
-      .from('usuario')
-      .delete()
-      .eq('id', id);
+    DataErro = await supabase.from('usuario').delete().eq('id', id);
 
     const resp = tratarResposta(DataErro, false, true);
     if (resp.mensagem) {
@@ -160,11 +123,10 @@ router.delete("/usuario/:id", async (req: Request, res: Response) => {
     } else {
       res.status(resp.status).json(resp.dados);
     }
-
   } catch (error) {
-    enviarErro500("Erro ao excluir o usuário")(res);
+    enviarErro500('Erro ao excluir o usuário')(res);
   }
-})
+});
 
 // POST reset-password
 router.post('/reset-password', async (req: Request, res: Response) => {
@@ -187,7 +149,9 @@ router.post('/reset-password', async (req: Request, res: Response) => {
       .eq('email', email);
 
     if (error || !data) {
-      res.status(404).json({ mensagem: 'Usuário não encontrado ou erro ao redefinir senha' });
+      res.status(404).json({
+        mensagem: 'Usuário não encontrado ou erro ao redefinir senha',
+      });
       return;
     }
 
@@ -210,7 +174,7 @@ router.post('/verify-code', async (req: Request, res: Response) => {
       res.status(400).json({ mensagem: 'Código inválido' });
     }
   } catch (error) {
-    enviarErro500("Erro ao verificar o código")(res);
+    enviarErro500('Erro ao verificar o código')(res);
   }
 });
 
@@ -231,15 +195,23 @@ router.post('/forgot-password', async (req: Request, res: Response) => {
     }
 
     // Gerar um código de recuperação (exemplo simples)
-    const codigoRecuperacao = Math.floor(100000 + Math.random() * 900000).toString();
+    const codigoRecuperacao = Math.floor(
+      100000 + Math.random() * 900000
+    ).toString();
 
     // Enviar o e-mail com o código de recuperação
-    await enviarEmail(email, 'Recuperação de Senha', `Seu código de recuperação é: ${codigoRecuperacao}`);
+    await enviarEmail(
+      email,
+      'Recuperação de Senha',
+      `Seu código de recuperação é: ${codigoRecuperacao}`
+    );
 
     // Retornar status 204 sem conteúdo
     res.status(204).send();
   } catch (error) {
-    res.status(500).json({ mensagem: `Erro ao enviar e-mail de recuperação teste_123: ${error}` });
+    res.status(500).json({
+      mensagem: `Erro ao enviar e-mail de recuperação teste_123: ${error}`,
+    });
   }
 });
 

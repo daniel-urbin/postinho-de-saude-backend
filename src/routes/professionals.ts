@@ -48,7 +48,16 @@ router.get('/professionals/:id', async (req: Request, res: Response) => {
 // POST /professionals - Cria um novo médico
 router.post('/professionals', async (req: Request, res: Response) => {
   try {
-    const { nome, email, senha, documento, telefone, dataNascimento, especialidade, endereco_id } = req.body;
+    const {
+      nome,
+      email,
+      senha,
+      documento,
+      telefone,
+      dataNascimento,
+      especialidade,
+      endereco_id,
+    } = req.body;
 
     const { data, error } = await supabase
       .from('usuario')
@@ -83,7 +92,15 @@ router.post('/professionals', async (req: Request, res: Response) => {
 router.put('/professionals/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { nome, email, documento, telefone, dataNascimento, especialidade, endereco_id } = req.body;
+    const {
+      nome,
+      email,
+      documento,
+      telefone,
+      dataNascimento,
+      especialidade,
+      endereco_id,
+    } = req.body;
 
     const { data, error } = await supabase
       .from('usuario')
