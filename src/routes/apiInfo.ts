@@ -86,10 +86,8 @@ const endpoints = `
   </div>
 `;
 
-
 router.get('/', (req: Request, res: Response) => {
   res.send(endpoints);
 });
-
 
 export default router;

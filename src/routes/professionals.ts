@@ -6,10 +6,7 @@ const router = express.Router();
 // GET /professionals - Lista todos os médicos
 router.get('/professionals', async (req: Request, res: Response) => {
   try {
-    const { data, error } = await supabase
-      .from('usuario')
-      .select('*')
-      .eq('tipo', 'medico');
+    const { data, error } = await supabase.from('usuario').select('*').eq('tipo', 'medico');
 
     if (error) {
       res.status(500).json({ mensagem: 'Erro ao buscar médicos', error });
@@ -48,7 +45,8 @@ router.get('/professionals/:id', async (req: Request, res: Response) => {
 // POST /professionals - Cria um novo médico
 router.post('/professionals', async (req: Request, res: Response) => {
   try {
-    const { nome, email, senha, documento, telefone, dataNascimento, especialidade, endereco_id } = req.body;
+    const { nome, email, senha, documento, telefone, dataNascimento, especialidade, endereco_id } =
+      req.body;
 
     const { data, error } = await supabase
       .from('usuario')
@@ -83,7 +81,8 @@ router.post('/professionals', async (req: Request, res: Response) => {
 router.put('/professionals/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { nome, email, documento, telefone, dataNascimento, especialidade, endereco_id } = req.body;
+    const { nome, email, documento, telefone, dataNascimento, especialidade, endereco_id } =
+      req.body;
 
     const { data, error } = await supabase
       .from('usuario')
@@ -117,11 +116,7 @@ router.delete('/professionals/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
-    const { error } = await supabase
-      .from('usuario')
-      .delete()
-      .eq('id', id)
-      .eq('tipo', 'medico');
+    const { error } = await supabase.from('usuario').delete().eq('id', id).eq('tipo', 'medico');
 
     if (error) {
       res.status(404).json({ mensagem: 'Erro ao excluir médico', error });

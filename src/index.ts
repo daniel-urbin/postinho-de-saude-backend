@@ -1,12 +1,12 @@
 import express from 'express';
+import cors from 'cors';
 import usuariosRouter from './routes/usuarios';
 import authRouter from './routes/auth';
 import unitsRouter from './routes/units';
 import professionalsRouter from './routes/professionals';
 import appointmentsRouter from './routes/appointments';
 import specialtiesRouter from './routes/specialties'; // Importar a nova rota
-import apiInfo from './routes/apiInfo'
-import cors from 'cors';
+import apiInfo from './routes/apiInfo';
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -23,7 +23,6 @@ apiV1Router.use('/units', unitsRouter);
 apiV1Router.use('/professionals', professionalsRouter);
 apiV1Router.use('/appointments', appointmentsRouter);
 apiV1Router.use('/specialties', specialtiesRouter);
-
 
 // so para teste
 apiV1Router.get('/teste', (req, res) => {
