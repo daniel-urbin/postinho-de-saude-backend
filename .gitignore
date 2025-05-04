@@ -84,3 +84,5 @@ docs/
 # Optional: Ignore Mac/Windows metadata files
 ehthumbs.db
 Icon?
+
+postman/
