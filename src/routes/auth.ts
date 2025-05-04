@@ -117,23 +117,37 @@ router.post('/login', async (req: Request, res: Response) => {
       expiresIn: '30d',
     });
 
-    console.log(user.endereco_id);
-    const enderecoId = Number(user.endereco_id);
+    const enderecoid: number = user.endereco_id || 1;
     const { data: dataEndereco, error: erroEndereco } = await supabase
       .from('endereco')
       .select('*')
-      .eq('id', enderecoId);
+      .eq('id', enderecoid);
 
     if (erroEndereco) {
       res.status(500).send({ mensagem: "Erro ao acessar a tabela 'endereco'" });
       return;
     }
 
-    console.log(dataEndereco);
-    const usuarioEndereco = dataEndereco[0];
+    let usuarioEndereco = {
+      endereco_id: 1,
+      cep: '123',
+      estado: '123',
+      cidade: '123',
+      bairro: '123',
+      rua: '123',
+      numero: '123',
+      criado_em: '123',
+      atualizado_em: '123',
+    };
 
+    if (dataEndereco) {
+      usuarioEndereco = dataEndereco[0];
+    }
+    console.log('deploy 2');
+    console.log(dataEndereco);
     console.log(usuarioEndereco);
     console.log(usuarioEndereco.cep);
+
     // Retornar os campos esperados no formato correto
     res.json({
       token,
