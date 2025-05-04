@@ -147,7 +147,7 @@ router.post('/login', async (req: Request, res: Response) => {
     });
   } catch (error) {
 
-    res.status(500).send({ mensagem: "Erro ao autenticar o usuário" });
+    res.status(500).send({ mensagem: `Erro ao autenticar o usuário ${error}` });
   }
 });
 
