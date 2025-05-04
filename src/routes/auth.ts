@@ -101,24 +101,47 @@ router.post('/login', async (req: Request, res: Response) => {
       expiresIn: '30d',
     });
 
+
+    const { data, error } = await supabase
+      .from('usuario')
+      .select('*')
+      .eq('email', email);
+
+
     // Retornar os campos esperados no formato correto
     res.json({
       token,
       user: {
         id: user.id,
+        address: user.endereco_id,
+/*
+
+        address: {
+          id: 123,
+          zipCode: "12345-123",
+          state: "RS",
+          city: "Caxias do Sul",
+          district: "Centro",
+          street: "rua tal",
+          number: "123",
+          createdAt: now,
+          updatedAt: now,
+        },
+*/
+
         name: user.nome,
         email: user.email,
         phone: user.telefone,
-        birthdate: user.dataNascimento,
-        document: user.documento,
+        birthdate: user.data_nascimento,
+        document: user.cpf,
         role: user.tipo,
-        address: user.endereco_id,
-        admin: user.tipo === 'admin' ? user.id : null,
-        doctor: user.tipo === 'medico' ? user.id : null,
-        patient: user.tipo === 'paciente' ? user.id : null,
-        createdAt: user.created_at, // Certifique-se de que o campo existe no banco
-        updatedAt: user.updated_at, // Certifique-se de que o campo existe no banco
+//        admin: user.tipo === 'admin' ? user.id : null,
+//        doctor: user.tipo === 'medico' ? user.id : null,
+//        patient: user.tipo === 'paciente' ? user.id : null,
+        createdAt: user.criado_em, 
+        updatedAt: user.atualizado_em, 
       },
+
     });
   } catch (error) {
 
