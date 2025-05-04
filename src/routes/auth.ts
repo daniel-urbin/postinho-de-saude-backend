@@ -127,7 +127,7 @@ router.post('/login', async (req: Request, res: Response) => {
    if (dataEndereco) {
     usuarioEndereco = dataEndereco[0];
    }
-
+console.log("deploy 2");
 console.log(dataEndereco);
 console.log(usuarioEndereco);
 console.log(usuarioEndereco.cep);
