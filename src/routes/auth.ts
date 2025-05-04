@@ -101,7 +101,7 @@ router.post('/login', async (req: Request, res: Response) => {
       expiresIn: '30d',
     });
 
-
+console.log(user.endereco_id);
     const { data: dataEndereco, error: erroEndereco } = await supabase
       .from('endereco')
       .select('*')
@@ -113,8 +113,11 @@ router.post('/login', async (req: Request, res: Response) => {
       return;
     }
 
+console.log(dataEndereco);
     const usuarioEndereco = dataEndereco[0];
 
+console.log(usuarioEndereco);
+console.log(usuarioEndereco.cep);
     // Retornar os campos esperados no formato correto
     res.json({
       token,
