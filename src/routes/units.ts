@@ -24,11 +24,7 @@ router.get('/units/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
-    const { data, error } = await supabase
-      .from('clinica')
-      .select('*')
-      .eq('id', id)
-      .single();
+    const { data, error } = await supabase.from('clinica').select('*').eq('id', id).single();
 
     if (error || !data) {
       res.status(404).json({ mensagem: 'Clínica não encontrada' });

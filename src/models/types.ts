@@ -1,4 +1,7 @@
-export type TDataErro = {
-  data: any;
-  error: any;
-} | null | undefined;
+export type TDataErro =
+  | {
+      data: any;
+      error: any;
+    }
+  | null
+  | undefined;

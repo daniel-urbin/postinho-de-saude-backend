@@ -7,7 +7,6 @@ import { enviarErro500 } from '../helpers/responseHelpers';
 
 const router = express.Router();
 
-
 // POST register
 router.post('/register', async (req: Request, res: Response) => {
   try {
@@ -17,18 +16,16 @@ router.post('/register', async (req: Request, res: Response) => {
 
     const { zip_code, street, number, district, city, state } = address;
 
-    const { data: addressData, error: addressError } = await supabase
-      .from('endereco')
-      .insert([
-        {
-          cep: zip_code,
-          rua: street,
-          numero: number,
-          bairro: district,
-          cidade: city,
-          estado: state
-        }
-      ]);
+    const { data: addressData, error: addressError } = await supabase.from('endereco').insert([
+      {
+        cep: zip_code,
+        rua: street,
+        numero: number,
+        bairro: district,
+        cidade: city,
+        estado: state,
+      },
+    ]);
 
     if (addressError) {
       console.log(addressError);
@@ -38,20 +35,18 @@ router.post('/register', async (req: Request, res: Response) => {
 
     const { id: addressId } = addressData![0];
 
-    const { data, error } = await supabase
-      .from('usuario')
-      .insert([
-        { 
-          nome: name,
-          email,
-          senha: encryptedPassword,
-          documento: document,
-          telefone: phone,
-          dataNascimento: birthdate,
-          endereco_id: addressId,
-          tipo: role
-        },
-      ]);
+    const { data, error } = await supabase.from('usuario').insert([
+      {
+        nome: name,
+        email,
+        senha: encryptedPassword,
+        documento: document,
+        telefone: phone,
+        dataNascimento: birthdate,
+        endereco_id: addressId,
+        tipo: role,
+      },
+    ]);
 
     if (error) {
       console.log(error);
@@ -64,7 +59,7 @@ router.post('/register', async (req: Request, res: Response) => {
 
     res.status(201).json({ mensagem: 'Usuário registrado com sucesso', data });
   } catch (error) {
-    enviarErro500("Erro ao registrar o usuário")(res);
+    enviarErro500('Erro ao registrar o usuário')(res);
   }
 });
 
@@ -73,10 +68,7 @@ router.post('/login', async (req: Request, res: Response) => {
   try {
     const { email, password: senha } = req.body;
 
-    const { data, error } = await supabase
-      .from('usuario')
-      .select('*')
-      .eq('email', email);
+    const { data, error } = await supabase.from('usuario').select('*').eq('email', email);
 
     if (error) {
       res.status(500).send({ mensagem: "Erro ao acessar a tabela 'usuario'" });
@@ -90,7 +82,6 @@ router.post('/login', async (req: Request, res: Response) => {
 
     const user = data[0];
     const passwordMatch = await bcrypt.compare(senha, user.senha);
-
 
     if (!passwordMatch) {
       res.status(422).json({ error: 'Email ou senha incorretos!' });
@@ -108,31 +99,30 @@ router.post('/login', async (req: Request, res: Response) => {
       .select('*')
       .eq('id', enderecoid);
 
-
     if (erroEndereco) {
       res.status(500).send({ mensagem: "Erro ao acessar a tabela 'endereco'" });
       return;
     }
 
-  let usuarioEndereco = {
-          endereco_id:1,
-          cep:"123", 
-          estado:"123",
-          cidade:"123",
-          bairro:"123", 
-          rua:"123", 
-          numero:"123",
-          criado_em:"123",
-          atualizado_em:"123",
-        };
- 
-   if (dataEndereco) {
-    usuarioEndereco = dataEndereco[0];
-   }
-console.log("deploy 2");
-console.log(dataEndereco);
-console.log(usuarioEndereco);
-console.log(usuarioEndereco.cep);
+    let usuarioEndereco = {
+      endereco_id: 1,
+      cep: '123',
+      estado: '123',
+      cidade: '123',
+      bairro: '123',
+      rua: '123',
+      numero: '123',
+      criado_em: '123',
+      atualizado_em: '123',
+    };
+
+    if (dataEndereco) {
+      usuarioEndereco = dataEndereco[0];
+    }
+    console.log('deploy 2');
+    console.log(dataEndereco);
+    console.log(usuarioEndereco);
+    console.log(usuarioEndereco.cep);
     // Retornar os campos esperados no formato correto
     res.json({
       token,
@@ -140,11 +130,11 @@ console.log(usuarioEndereco.cep);
         id: user.id,
         address: {
           id: user.endereco_id,
-          zipCode: usuarioEndereco.cep, 
+          zipCode: usuarioEndereco.cep,
           state: usuarioEndereco.estado,
           city: usuarioEndereco.cidade,
-          district: usuarioEndereco.bairro, 
-          street: usuarioEndereco.rua, 
+          district: usuarioEndereco.bairro,
+          street: usuarioEndereco.rua,
           number: usuarioEndereco.numero,
           createdAt: usuarioEndereco.criado_em,
           updatedAt: usuarioEndereco.atualizado_em,
@@ -155,16 +145,14 @@ console.log(usuarioEndereco.cep);
         birthdate: user.data_nascimento,
         document: user.cpf,
         role: user.tipo,
-//        admin: user.tipo === 'admin' ? user.id : null,
-//        doctor: user.tipo === 'medico' ? user.id : null,
-//        patient: user.tipo === 'paciente' ? user.id : null,
-        createdAt: user.criado_em, 
-        updatedAt: user.atualizado_em, 
+        //        admin: user.tipo === 'admin' ? user.id : null,
+        //        doctor: user.tipo === 'medico' ? user.id : null,
+        //        patient: user.tipo === 'paciente' ? user.id : null,
+        createdAt: user.criado_em,
+        updatedAt: user.atualizado_em,
       },
-
     });
   } catch (error) {
-
     res.status(500).send({ mensagem: `Erro ao autenticar o usuário ${error}` });
   }
 });
@@ -191,10 +179,7 @@ router.post('/forgot-password', async (req: Request, res: Response) => {
   try {
     const { email } = req.body;
 
-    const { data, error } = await supabase
-      .from('usuario')
-      .select('id')
-      .eq('email', email);
+    const { data, error } = await supabase.from('usuario').select('id').eq('email', email);
 
     if (error || !data || data.length === 0) {
       res.status(404).json({ mensagem: 'E-mail não encontrado' });
@@ -203,7 +188,11 @@ router.post('/forgot-password', async (req: Request, res: Response) => {
 
     const codigoRecuperacao = Math.floor(100000 + Math.random() * 900000).toString();
 
-    await enviarEmail(email, 'Recuperação de Senha', `Seu código de recuperação é: ${codigoRecuperacao}`);
+    await enviarEmail(
+      email,
+      'Recuperação de Senha',
+      `Seu código de recuperação é: ${codigoRecuperacao}`,
+    );
 
     res.status(204).send();
   } catch (error) {
