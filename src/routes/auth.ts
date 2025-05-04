@@ -101,12 +101,10 @@ router.post('/login', async (req: Request, res: Response) => {
       expiresIn: '30d',
     });
 
-console.log(user.endereco_id);
-const enderecoId = Number(user.endereco_id);
     const { data: dataEndereco, error: erroEndereco } = await supabase
       .from('endereco')
       .select('*')
-      .eq('id', enderecoId);
+      .eq('id', user.endereco_id);
 
 
     if (erroEndereco) {
@@ -114,9 +112,23 @@ const enderecoId = Number(user.endereco_id);
       return;
     }
 
-console.log(dataEndereco);
-    const usuarioEndereco = dataEndereco[0];
+  let usuarioEndereco = {
+          endereco_id:1,
+          cep:"", 
+          estado:"",
+          cidade:"",
+          bairro:"", 
+          rua:"", 
+          numero:"",
+          criado_em:"",
+          atualizado_em:"",
+        };
+ 
+   if (dataEndereco) {
+    usuarioEndereco = dataEndereco[0];
+   }
 
+console.log(dataEndereco);
 console.log(usuarioEndereco);
 console.log(usuarioEndereco.cep);
     // Retornar os campos esperados no formato correto
