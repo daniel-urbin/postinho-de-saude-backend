@@ -1,0 +1,1109 @@
+{
+  "info": {
+    "_postman_id": "8be722cc-4fec-458b-85f1-b54a56d4deff",
+    "name": "health-clinic",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "44259526",
+    "_collection_link": "https://daniel-8094001.postman.co/workspace/daniel's-Workspace~221d88e5-bd29-445d-800f-48c7e147771e/collection/44259526-8be722cc-4fec-458b-85f1-b54a56d4deff?action=share&source=collection_link&creator=44259526"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"usuario@email.com\",\n  \"password\": \"sua_senha\"\n}"
+            },
+            "url": {
+              "raw": "http://postinho-de-saude-backend.vercel.app/api/v1/auth/login",
+              "protocol": "http",
+              "host": ["postinho-de-saude-backend", "vercel", "app"],
+              "path": ["api", "v1", "auth", "login"]
+            }
+          },
+          "response": [
+            {
+              "name": "login",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"usuario@email.com\",\n  \"password\": \"sua_senha\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [],
+              "body": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\r\n    \"user\": {\r\n        \"id\": \"1\",\r\n        \"name\": \"João da Silva\",\r\n        \"email\": \"joao@example.com\",\r\n        \"phone\": \"+5511999999999\",\r\n        \"birthdate\": \"1990-01-01\",\r\n        \"document\": \"12345678900\",\r\n        \"role\": \"PATIENT\",\r\n        \"address\": \"10\",\r\n        \"admin\": null,\r\n        \"doctor\": null,\r\n        \"patient\": \"22\",\r\n        \"createdAt\": \"2024-01-01T12:00:00Z\",\r\n        \"updatedAt\": \"2024-01-01T12:00:00Z\"\r\n    }\r\n}"
+            },
+            {
+              "name": "unprocessable entity",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"usuario@email.com\",\n  \"password\": \"sua_senha\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            },
+            {
+              "name": "internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"usuario@email.com\",\n  \"password\": \"sua_senha\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Nome do Usu\\u00e1rio\",\n  \"email\": \"usuario@email.com\",\n  \"password\": \"senha123\",\n  \"document\": \"12345678900\",\n  \"phone\": \"+5511999999999\",\n  \"birthdate\": \"1990-01-01\",\n  \"address\": \"endereco_id\",\n  \"role\": \"PATIENT\"\n}\n\n"
+            },
+            "url": {
+              "raw": "http://postinho-de-saude-backend.vercel.app/api/v1/auth/register",
+              "protocol": "http",
+              "host": ["postinho-de-saude-backend", "vercel", "app"],
+              "path": ["api", "v1", "auth", "register"]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"usuario@email.com\",\n  \"password\": \"sua_senha\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            },
+            {
+              "name": "bad request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"usuario@email.com\",\n  \"password\": \"sua_senha\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            },
+            {
+              "name": "conflict",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Nome do Usu\\u00e1rio\",\n  \"email\": \"usuario@email.com\",\n  \"password\": \"senha123\",\n  \"document\": \"12345678900\",\n  \"phone\": \"+5511999999999\",\n  \"birthdate\": \"1990-01-01\",\n  \"address\": \"endereco_id\",\n  \"role\": \"PATIENT\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/register",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "register"]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            },
+            {
+              "name": "internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"usuario@email.com\",\n  \"password\": \"sua_senha\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "forgot-password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"usuario@email.com\"\n}"
+            },
+            "url": {
+              "raw": "http://postinho-de-saude-backend.vercel.app/api/v1/auth/forgot-password",
+              "protocol": "http",
+              "host": ["postinho-de-saude-backend", "vercel", "app"],
+              "path": ["api", "v1", "auth", "forgot-password"]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"usuario@email.com\",\n  \"password\": \"sua_senha\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [],
+              "body": "{\r\n    \"message\": \"O código foi enviado pelo seu e-mail com sucesso.\"\r\n}"
+            },
+            {
+              "name": "bad request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"usuario@email.com\",\n  \"password\": \"sua_senha\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            },
+            {
+              "name": "internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"usuario@email.com\",\n  \"password\": \"sua_senha\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "verify-code",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "http://postinho-de-saude-backend.vercel.app/api/v1/auth/verify-code",
+              "protocol": "http",
+              "host": ["postinho-de-saude-backend", "vercel", "app"],
+              "path": ["api", "v1", "auth", "verify-code"]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"usuario@email.com\",\n  \"password\": \"sua_senha\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            },
+            {
+              "name": "bad request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"usuario@email.com\",\n  \"password\": \"sua_senha\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            },
+            {
+              "name": "internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"usuario@email.com\",\n  \"password\": \"sua_senha\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "reset-password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"email@email.com\",\n    \"password\": \"novaSenha123\"\n}"
+            },
+            "url": {
+              "raw": "http://postinho-de-saude-backend.vercel.app/api/v1/auth/reset-password",
+              "protocol": "http",
+              "host": ["postinho-de-saude-backend", "vercel", "app"],
+              "path": ["api", "v1", "auth", "reset-password"]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"usuario@email.com\",\n  \"password\": \"sua_senha\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            },
+            {
+              "name": "bad request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"usuario@email.com\",\n  \"password\": \"sua_senha\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            },
+            {
+              "name": "internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"usuario@email.com\",\n  \"password\": \"sua_senha\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "unit",
+      "item": [
+        {
+          "name": "units",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/units",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "units"]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": ""
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n    {\n        \"id\": \"1\",\n        \"name\": \"Central Clinic\",\n        \"distance\": \"2.5 km\",\n        \"createdAt\": \"2025-04-20T12:00:00Z\",\n        \"updatedAt\": \"2025-04-20T12:00:00Z\",\n        \"address\": {\n            \"id\": \"1\",\n            \"zipCode\": \"12345-678\",\n            \"state\": \"RS\",\n            \"city\": \"Caxias do Sul\",\n            \"district\": \"Centro\",\n            \"street\": \"Rua das Flores\",\n            \"number\": \"123\",\n            \"createdAt\": \"2025-04-20T12:00:00Z\",\n            \"updatedAt\": \"2025-04-20T12:00:00Z\"\n        }\n    },\n    {\n        \"id\": \"2\",\n        \"name\": \"North Clinic\",\n        \"distance\": \"5.0 km\",\n        \"createdAt\": \"2025-04-18T09:30:00Z\",\n        \"updatedAt\": \"2025-04-18T09:30:00Z\",\n        \"address\": {\n            \"id\": \"2\",\n            \"zipCode\": \"98765-432\",\n            \"state\": \"RS\",\n            \"city\": \"Caxias do Sul\",\n            \"district\": \"Pioneiro\",\n            \"street\": \"Avenida Brasil\",\n            \"number\": \"456\",\n            \"createdAt\": \"2025-04-18T09:30:00Z\",\n            \"updatedAt\": \"2025-04-18T09:30:00Z\"\n        }\n    }\n]"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "professional",
+      "item": [
+        {
+          "name": "professionals",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/professionals?specialty_id=1&unit_id=1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "professionals"],
+              "query": [
+                {
+                  "key": "specialty_id",
+                  "value": "1"
+                },
+                {
+                  "key": "unit_id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": ""
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"id\": \"doctor-1\",\n    \"crm\": \"CRM123456\",\n    \"specialty\": {\n      \"id\": \"specialty-1\",\n      \"name\": \"Cardiology\",\n      \"createdAt\": \"2025-03-01T09:00:00Z\",\n      \"updatedAt\": \"2025-03-01T09:00:00Z\"\n    },\n    \"unit\": {\n      \"id\": \"unit-1\",\n      \"name\": \"Southside Medical Center\",\n      \"distance\": \"1.2 mi\",\n      \"createdAt\": \"2025-01-01T10:00:00Z\",\n      \"updatedAt\": \"2025-01-01T10:00:00Z\",\n      \"address\": {\n        \"id\": \"address-1\",\n        \"zipCode\": \"12345\",\n        \"state\": \"CA\",\n        \"city\": \"Los Angeles\",\n        \"district\": \"Downtown\",\n        \"street\": \"Maple St.\",\n        \"number\": \"101\",\n        \"createdAt\": \"2025-01-01T09:00:00Z\",\n        \"updatedAt\": \"2025-01-01T09:00:00Z\"\n      }\n    },\n    \"user\": {\n      \"id\": \"user-1\",\n      \"name\": \"Dr. Alice Johnson\",\n      \"email\": \"alice.johnson@example.com\",\n      \"phone\": \"(123) 456-7890\",\n      \"birthdate\": \"1980-06-15\",\n      \"document\": \"12345678900\",\n      \"role\": \"DOCTOR\",\n      \"createdAt\": \"2025-01-01T08:00:00Z\",\n      \"updatedAt\": \"2025-01-01T08:00:00Z\",\n      \"address\": {\n        \"id\": \"address-2\",\n        \"zipCode\": \"54321\",\n        \"state\": \"CA\",\n        \"city\": \"Los Angeles\",\n        \"district\": \"Westside\",\n        \"street\": \"Oak St.\",\n        \"number\": \"202\",\n        \"createdAt\": \"2025-01-01T07:00:00Z\",\n        \"updatedAt\": \"2025-01-01T07:00:00Z\"\n      }\n    },\n    \"createdAt\": \"2025-01-10T10:00:00Z\",\n    \"updatedAt\": \"2025-03-05T10:00:00Z\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "availability",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/professionals/{{ professionalId }}/availability",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": [
+                "api",
+                "v1",
+                "professionals",
+                "{{ professionalId }}",
+                "availability"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": ""
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"availability\": {\n    \"2025-05-13\": [\"09:00\", \"10:00\", \"11:00\", \"13:00\", \"14:00\"],\n    \"2025-05-14\": [\"10:00\", \"11:00\", \"15:00\"],\n    \"2025-05-15\": [\"09:00\", \"11:00\", \"13:00\", \"16:00\"]\n  }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "appointment",
+      "item": [
+        {
+          "name": "appointments",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/appointments/{{ appointmentId }}?professional_id=1&patient_id=1&status=completed&date=2025-04-20",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "appointments", "{{ appointmentId }}"],
+              "query": [
+                {
+                  "key": "professional_id",
+                  "value": "1"
+                },
+                {
+                  "key": "patient_id",
+                  "value": "1"
+                },
+                {
+                  "key": "status",
+                  "value": "completed"
+                },
+                {
+                  "key": "date",
+                  "value": "2025-04-20"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": ""
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "[\r\n    {\r\n        \"id\": \"appointment-123\",\r\n        \"professional\": {\r\n            \"id\": \"doctor-1\",\r\n            \"crm\": \"CRM123456\",\r\n            \"specialty\": {\r\n                \"id\": \"specialty-1\",\r\n                \"name\": \"Cardiology\",\r\n                \"createdAt\": \"2025-03-01T09:00:00Z\",\r\n                \"updatedAt\": \"2025-03-01T09:00:00Z\"\r\n            },\r\n            \"unit\": {\r\n                \"id\": \"unit-1\",\r\n                \"name\": \"Southside Medical Center\",\r\n                \"distance\": \"1.2 mi\",\r\n                \"createdAt\": \"2025-01-01T10:00:00Z\",\r\n                \"updatedAt\": \"2025-01-01T10:00:00Z\",\r\n                \"address\": {\r\n                    \"id\": \"address-1\",\r\n                    \"zipCode\": \"12345\",\r\n                    \"state\": \"CA\",\r\n                    \"city\": \"Los Angeles\",\r\n                    \"district\": \"Downtown\",\r\n                    \"street\": \"Maple St.\",\r\n                    \"number\": \"101\",\r\n                    \"createdAt\": \"2025-01-01T09:00:00Z\",\r\n                    \"updatedAt\": \"2025-01-01T09:00:00Z\"\r\n                }\r\n            },\r\n            \"user\": {\r\n                \"id\": \"user-1\",\r\n                \"name\": \"Dr. Alice Johnson\",\r\n                \"email\": \"alice.johnson@example.com\",\r\n                \"phone\": \"(123) 456-7890\",\r\n                \"birthdate\": \"1980-06-15\",\r\n                \"document\": \"12345678900\",\r\n                \"role\": \"DOCTOR\",\r\n                \"createdAt\": \"2025-01-01T08:00:00Z\",\r\n                \"updatedAt\": \"2025-01-01T08:00:00Z\",\r\n                \"address\": {\r\n                    \"id\": \"address-2\",\r\n                    \"zipCode\": \"54321\",\r\n                    \"state\": \"CA\",\r\n                    \"city\": \"Los Angeles\",\r\n                    \"district\": \"Westside\",\r\n                    \"street\": \"Oak St.\",\r\n                    \"number\": \"202\",\r\n                    \"createdAt\": \"2025-01-01T07:00:00Z\",\r\n                    \"updatedAt\": \"2025-01-01T07:00:00Z\"\r\n                }\r\n            },\r\n            \"createdAt\": \"2025-01-10T10:00:00Z\",\r\n            \"updatedAt\": \"2025-03-05T10:00:00Z\"\r\n        },\r\n        \"patient\": {\r\n            \"id\": \"doctor-1\",\r\n            \"cns\": \"123\",\r\n            \"user\": {\r\n                \"id\": \"user-1\",\r\n                \"name\": \"Dr. Alice Johnson\",\r\n                \"email\": \"alice.johnson@example.com\",\r\n                \"phone\": \"(123) 456-7890\",\r\n                \"birthdate\": \"1980-06-15\",\r\n                \"document\": \"12345678900\",\r\n                \"role\": \"DOCTOR\",\r\n                \"createdAt\": \"2025-01-01T08:00:00Z\",\r\n                \"updatedAt\": \"2025-01-01T08:00:00Z\",\r\n                \"address\": {\r\n                    \"id\": \"address-2\",\r\n                    \"zipCode\": \"54321\",\r\n                    \"state\": \"CA\",\r\n                    \"city\": \"Los Angeles\",\r\n                    \"district\": \"Westside\",\r\n                    \"street\": \"Oak St.\",\r\n                    \"number\": \"202\",\r\n                    \"createdAt\": \"2025-01-01T07:00:00Z\",\r\n                    \"updatedAt\": \"2025-01-01T07:00:00Z\"\r\n                }\r\n            },\r\n            \"createdAt\": \"2025-01-10T10:00:00Z\",\r\n            \"updatedAt\": \"2025-03-05T10:00:00Z\"\r\n        },\r\n        \"unit\": {\r\n            \"id\": \"1\",\r\n            \"name\": \"Central Clinic\",\r\n            \"distance\": \"2.5 km\",\r\n            \"createdAt\": \"2025-04-20T12:00:00Z\",\r\n            \"updatedAt\": \"2025-04-20T12:00:00Z\",\r\n            \"address\": {\r\n                \"id\": \"1\",\r\n                \"zipCode\": \"12345-678\",\r\n                \"state\": \"RS\",\r\n                \"city\": \"Caxias do Sul\",\r\n                \"district\": \"Centro\",\r\n                \"street\": \"Rua das Flores\",\r\n                \"number\": \"123\",\r\n                \"createdAt\": \"2025-04-20T12:00:00Z\",\r\n                \"updatedAt\": \"2025-04-20T12:00:00Z\"\r\n            }\r\n        },\r\n        \"date\": \"2025-05-14\",\r\n        \"time\": \"10:30\",\r\n        \"createdAt\": \"2025-04-20T12:30:00.000Z\",\r\n        \"updatedAt\": \"2025-04-21T08:00:00.000Z\"\r\n    }\r\n]"
+            }
+          ]
+        },
+        {
+          "name": "appointments",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"professional_id\": \"1\",\r\n  \"patient_id\": \"11\",\r\n  \"unit_id\": \"1\",\r\n  \"date\": \"2025-05-13\",\r\n  \"time\": \"14:00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/appointments",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "appointments"]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": ""
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\r\n  \"id\": \"1\",\r\n  \"professional_id\": \"1\",\r\n  \"patient_id\": \"1\",\r\n  \"unit_id\": \"1\",\r\n  \"status\": \"pending\",\r\n  \"date\": \"2025-05-13\",\r\n  \"time\": \"14:00\",\r\n  \"createdAt\": \"2025-04-20T12:30:00.000Z\",\r\n  \"updatedAt\": \"2025-04-20T12:30:00.000Z\"\r\n}\r\n"
+            }
+          ]
+        },
+        {
+          "name": "appointments",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"date\": \"2025-05-14\",\r\n  \"time\": \"10:30\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/appointments/{{ appointmentId }}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "appointments", "{{ appointmentId }}"]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": ""
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\r\n  \"id\": \"1\",\r\n  \"doctor_id\": \"1\",\r\n  \"patient_id\": \"1\",\r\n  \"unit_id\": \"1\",\r\n  \"status\": \"pending\",\r\n  \"date\": \"2025-05-13\",\r\n  \"time\": \"14:00\",\r\n  \"createdAt\": \"2025-04-20T12:30:00.000Z\",\r\n  \"updatedAt\": \"2025-04-21T12:30:00.000Z\"\r\n}\r\n"
+            }
+          ]
+        },
+        {
+          "name": "appointments",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"completed\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/appointment/{{ appointmentId }}/status",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": [
+                "api",
+                "v1",
+                "appointment",
+                "{{ appointmentId }}",
+                "status"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": ""
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\r\n  \"id\": \"1\",\r\n  \"doctor_id\": \"1\",\r\n  \"patient_id\": \"1\",\r\n  \"unit_id\": \"1\",\r\n  \"status\": \"completed\",\r\n  \"date\": \"2025-05-13\",\r\n  \"time\": \"14:00\",\r\n  \"createdAt\": \"2025-04-20T12:30:00.000Z\",\r\n  \"updatedAt\": \"2025-04-21T12:30:00.000Z\"\r\n}\r\n"
+            }
+          ]
+        },
+        {
+          "name": "appointments",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"doctor_id\": \"1\",\r\n  \"patient_id\": \"11\",\r\n  \"unit_id\": \"1\",\r\n  \"date\": \"2025-05-13\",\r\n  \"time\": \"14:00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/appointment/{{ appointmentId }}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "appointment", "{{ appointmentId }}"]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": ""
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "prescriptions",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"medications\": [\r\n    {\r\n      \"name\": \"Amoxicilina\",\r\n      \"dosage\": \"500mg\",\r\n      \"frequency\": \"3x ao dia\",\r\n      \"duration\": \"7 dias\",\r\n      \"notes\": \"Tomar após as refeições\"\r\n    },\r\n    {\r\n      \"name\": \"Dipirona\",\r\n      \"dosage\": \"1g\",\r\n      \"frequency\": \"4/4h se necessário\",\r\n      \"duration\": \"5 dias\"\r\n    }\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/appointment/{{ appointmentId }}/prescriptions",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": [
+                "api",
+                "v1",
+                "appointment",
+                "{{ appointmentId }}",
+                "prescriptions"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": ""
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\r\n  \"id\": \"1\",\r\n  \"appointment_id\": \"1\",\r\n  \"createdAt\": \"2025-04-21T15:30:00.000Z\",\r\n  \"updatedAt\": \"2025-04-21T15:30:00.000Z\",\r\n  \"medications\": [\r\n    {\r\n      \"name\": \"Amoxicilina\",\r\n      \"dosage\": \"500mg\",\r\n      \"frequency\": \"3x ao dia\",\r\n      \"duration\": \"7 dias\",\r\n      \"notes\": \"Tomar após as refeições\"\r\n    },\r\n    {\r\n      \"name\": \"Dipirona\",\r\n      \"dosage\": \"1g\",\r\n      \"frequency\": \"4/4h se necessário\",\r\n      \"duration\": \"5 dias\",\r\n      \"notes\": null\r\n    }\r\n  ]\r\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "specialty",
+      "item": [
+        {
+          "name": "specialties",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/specialties?unit_id=1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "specialties"],
+              "query": [
+                {
+                  "key": "unit_id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": ""
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"id\": \"1\",\n    \"name\": \"Cardiology\",\n    \"createdAt\": \"2025-04-01T10:00:00Z\",\n    \"updatedAt\": \"2025-04-01T10:00:00Z\"\n  },\n  {\n    \"id\": \"2\",\n    \"name\": \"Dermatology\",\n    \"createdAt\": \"2025-03-15T14:20:00Z\",\n    \"updatedAt\": \"2025-03-15T14:20:00Z\"\n  },\n  {\n    \"id\": \"3\",\n    \"name\": \"Pediatrics\",\n    \"createdAt\": \"2025-02-10T09:45:00Z\",\n    \"updatedAt\": \"2025-02-10T09:45:00Z\"\n  }\n]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

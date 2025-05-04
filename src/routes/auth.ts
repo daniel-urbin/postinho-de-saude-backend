@@ -117,27 +117,54 @@ router.post('/login', async (req: Request, res: Response) => {
       expiresIn: '30d',
     });
 
+    console.log(user.endereco_id);
+    const enderecoId = Number(user.endereco_id);
+    const { data: dataEndereco, error: erroEndereco } = await supabase
+      .from('endereco')
+      .select('*')
+      .eq('id', enderecoId);
+
+    if (erroEndereco) {
+      res.status(500).send({ mensagem: "Erro ao acessar a tabela 'endereco'" });
+      return;
+    }
+
+    console.log(dataEndereco);
+    const usuarioEndereco = dataEndereco[0];
+
+    console.log(usuarioEndereco);
+    console.log(usuarioEndereco.cep);
     // Retornar os campos esperados no formato correto
     res.json({
       token,
       user: {
         id: user.id,
+        address: {
+          id: user.endereco_id,
+          zipCode: usuarioEndereco.cep,
+          state: usuarioEndereco.estado,
+          city: usuarioEndereco.cidade,
+          district: usuarioEndereco.bairro,
+          street: usuarioEndereco.rua,
+          number: usuarioEndereco.numero,
+          createdAt: usuarioEndereco.criado_em,
+          updatedAt: usuarioEndereco.atualizado_em,
+        },
         name: user.nome,
         email: user.email,
         phone: user.telefone,
-        birthdate: user.dataNascimento,
-        document: user.documento,
+        birthdate: user.data_nascimento,
+        document: user.cpf,
         role: user.tipo,
-        address: user.endereco_id,
-        admin: user.tipo === 'admin' ? user.id : null,
-        doctor: user.tipo === 'medico' ? user.id : null,
-        patient: user.tipo === 'paciente' ? user.id : null,
-        createdAt: user.created_at, // Certifique-se de que o campo existe no banco
-        updatedAt: user.updated_at, // Certifique-se de que o campo existe no banco
+        //        admin: user.tipo === 'admin' ? user.id : null,
+        //        doctor: user.tipo === 'medico' ? user.id : null,
+        //        patient: user.tipo === 'paciente' ? user.id : null,
+        createdAt: user.criado_em,
+        updatedAt: user.atualizado_em,
       },
     });
   } catch (error) {
-    res.status(500).send({ mensagem: 'Erro ao autenticar o usuário' });
+    res.status(500).send({ mensagem: `Erro ao autenticar o usuário ${error}` });
   }
 });
 
