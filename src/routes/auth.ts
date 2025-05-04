@@ -102,10 +102,11 @@ router.post('/login', async (req: Request, res: Response) => {
     });
 
 console.log(user.endereco_id);
+const enderecoId = Number(user.endereco_id);
     const { data: dataEndereco, error: erroEndereco } = await supabase
       .from('endereco')
       .select('*')
-      .eq('id', user.endereco_id);
+      .eq('id', enderecoId);
 
 
     if (erroEndereco) {
