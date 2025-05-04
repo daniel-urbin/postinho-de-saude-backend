@@ -101,10 +101,12 @@ router.post('/login', async (req: Request, res: Response) => {
       expiresIn: '30d',
     });
 
+    const enderecoid: number = user.endereco_id || 1;
+
     const { data: dataEndereco, error: erroEndereco } = await supabase
       .from('endereco')
       .select('*')
-      .eq('id', user.endereco_id);
+      .eq('id', enderecoid);
 
 
     if (erroEndereco) {
@@ -114,14 +116,14 @@ router.post('/login', async (req: Request, res: Response) => {
 
   let usuarioEndereco = {
           endereco_id:1,
-          cep:"", 
-          estado:"",
-          cidade:"",
-          bairro:"", 
-          rua:"", 
-          numero:"",
-          criado_em:"",
-          atualizado_em:"",
+          cep:"123", 
+          estado:"123",
+          cidade:"123",
+          bairro:"123", 
+          rua:"123", 
+          numero:"123",
+          criado_em:"123",
+          atualizado_em:"123",
         };
  
    if (dataEndereco) {
