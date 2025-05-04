@@ -102,33 +102,35 @@ router.post('/login', async (req: Request, res: Response) => {
     });
 
 
-    const { data, error } = await supabase
-      .from('usuario')
+    const { data: dataEndereco, error: erroEndereco } = await supabase
+      .from('endereco')
       .select('*')
-      .eq('email', email);
+      .eq('id', user.endereco_id);
 
+
+    if (erroEndereco) {
+      res.status(500).send({ mensagem: "Erro ao acessar a tabela 'endereco'" });
+      return;
+    }
+
+    const usuarioEndereco = dataEndereco[0];
 
     // Retornar os campos esperados no formato correto
     res.json({
       token,
       user: {
         id: user.id,
-        address: user.endereco_id,
-/*
-
         address: {
-          id: 123,
-          zipCode: "12345-123",
-          state: "RS",
-          city: "Caxias do Sul",
-          district: "Centro",
-          street: "rua tal",
-          number: "123",
-          createdAt: now,
-          updatedAt: now,
+          id: user.endereco_id,
+          zipCode: usuarioEndereco.cep, 
+          state: usuarioEndereco.estado,
+          city: usuarioEndereco.cidade,
+          district: usuarioEndereco.bairro, 
+          street: usuarioEndereco.rua, 
+          number: usuarioEndereco.numero,
+          createdAt: usuarioEndereco.criado_em,
+          updatedAt: usuarioEndereco.atualizado_em,
         },
-*/
-
         name: user.nome,
         email: user.email,
         phone: user.telefone,
