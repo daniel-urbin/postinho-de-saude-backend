@@ -115,6 +115,8 @@ router.post('/login', async (req: Request, res: Response) => {
       return;
     }
 
+  // vou dixar por agora já que evia erro 500 se o endereço não exite
+  // depois altero a validação para unificar com o endereco.
   let usuarioEndereco = {
           endereco_id:1,
           cep:"123", 
@@ -131,10 +133,6 @@ router.post('/login', async (req: Request, res: Response) => {
     usuarioEndereco = dataEndereco;
    }
 
-console.log("deploy 5");
-console.log(dataEndereco);
-console.log(usuarioEndereco);
-console.log(usuarioEndereco.cep);
     // Retornar os campos esperados no formato correto
     res.json({
       token,
