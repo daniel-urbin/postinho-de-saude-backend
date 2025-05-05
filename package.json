@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate dev"
   },
   "keywords": [],
   "author": "",
@@ -34,6 +37,7 @@
     "eslint-plugin-prettier": "^5.3.1",
     "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
     "typedoc": "^0.28.1",
     "typescript": "^5.8.2"
   }
