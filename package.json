@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^6.7.0",
     "@supabase/supabase-js": "^2.49.4",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
@@ -33,6 +34,7 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.3.1",
     "prettier": "^3.5.3",
+    "prisma": "^6.7.0",
     "ts-node": "^10.9.2",
     "typedoc": "^0.28.1",
     "typescript": "^5.8.2"
