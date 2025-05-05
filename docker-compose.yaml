@@ -23,5 +23,10 @@ services:
       - .:/app
     command: sh -c "npm run prisma:generate && npm run dev"
 
+  valkey:
+    image: valkey/valkey
+    ports:
+      - "6379:6379"
+
 volumes:
   db_data:
