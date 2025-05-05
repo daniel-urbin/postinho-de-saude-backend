@@ -126,10 +126,11 @@ router.post('/login', async (req: Request, res: Response) => {
           atualizado_em:"123",
         };
  
-   if (dataEndereco) {
-    usuarioEndereco = dataEndereco[0];
-   }
-console.log("deploy 2");
+//   if (dataEndereco) {
+//    usuarioEndereco = dataEndereco[0];
+//   }
+
+console.log("deploy 3");
 console.log(dataEndereco);
 console.log(usuarioEndereco);
 console.log(usuarioEndereco.cep);
