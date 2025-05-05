@@ -106,7 +106,7 @@ router.post('/login', async (req: Request, res: Response) => {
     const { data: dataEndereco, error: erroEndereco } = await supabase
       .from('endereco')
       .select('*')
-     //s .eq('id', enderecoid)
+      .eq('id', enderecoid)
       .single();
 
 
