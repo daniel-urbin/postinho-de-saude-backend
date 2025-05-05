@@ -106,7 +106,8 @@ router.post('/login', async (req: Request, res: Response) => {
     const { data: dataEndereco, error: erroEndereco } = await supabase
       .from('endereco')
       .select('*')
-      .eq('id', enderecoid);
+      .eq('id', enderecoid)
+      .single();
 
 
     if (erroEndereco) {
@@ -126,9 +127,9 @@ router.post('/login', async (req: Request, res: Response) => {
           atualizado_em:"123",
         };
  
-//   if (dataEndereco) {
-//    usuarioEndereco = dataEndereco[0];
-//   }
+   if (dataEndereco) {
+    usuarioEndereco = dataEndereco;
+   }
 
 console.log("deploy 3");
 console.log(dataEndereco);
